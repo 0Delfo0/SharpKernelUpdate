@@ -10,6 +10,5 @@ namespace SharpKernelUpdate.App.Model
     {
         public string FullName;
         public string[] SplitName;
-        public int Id;
     }
 }

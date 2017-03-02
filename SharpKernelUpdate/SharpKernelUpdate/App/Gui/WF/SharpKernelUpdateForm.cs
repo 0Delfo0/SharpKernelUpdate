@@ -16,5 +16,11 @@ namespace SharpKernelUpdate
         {
             InitializeComponent();
         }
+
+        private void stableRelease_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.LOG.Info(sender);
+            Program.LOG.Info(e);
+        }
     }
 }

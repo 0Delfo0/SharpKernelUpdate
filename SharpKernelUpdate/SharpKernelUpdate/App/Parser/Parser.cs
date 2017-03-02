@@ -17,13 +17,7 @@ namespace SharpKernelUpdate.App.Parser
         private static SortedList<string, List<Item>> MainVersionsList = new SortedList<string, List<Item>>();
         private static CultureInfo CI = new CultureInfo("it-IT");
 
-
-        public Parser()
-        {
-            MainVersionsList = new SortedList<string, List<Item>>();
-        }
-
-        public string GetCall(String Url)
+        public string GetCall(String Url) 
         {
             WebRequest request = WebRequest.Create(Url);
             WebResponse response = request.GetResponse();
@@ -36,59 +30,52 @@ namespace SharpKernelUpdate.App.Parser
             return responseFromServer;
         }
 
-
-        public void MainVersion()
-        {
-
-        }
-
         //public List<Item> getItems()
         public void getItems()
         {
-
-
-            HtmlParser HtmlParser = new HtmlParser();
-            IHtmlDocument IHtmlDocument = HtmlParser.Parse(GetCall(BaseUrl));
-            IHtmlCollection<IElement> Links = IHtmlDocument.Links;
-
-            Item Item;
-
-
-
-            foreach (IElement Link in Links)
+            try
             {
+                HtmlParser HtmlParser = new HtmlParser();
+                IHtmlDocument IHtmlDocument = HtmlParser.Parse(GetCall(BaseUrl));
+                IHtmlCollection<IElement> Links = IHtmlDocument.Links;
 
-                string FullName = Link.TextContent;
-                string[] Tmp = FullName.Split('.');
+                Item Item;
 
-                if (Tmp[0].StartsWith("v", true, CI))
+                foreach (IElement Link in Links)
                 {
-                    Tmp[0] = formatFirst(Tmp[0]);
+                    string FullName = Link.TextContent;
+                    string[] Tmp = FullName.Split('.');
 
-                    string MainVersion = Tmp[0];
-
-                    Item = new Item();
-
-
-                    Item.FullName = FullName;
-                    Item.SplitName = Tmp;
-
-
-                    List<Item> ListItem = new List<Item>();
-                    if (MainVersionsList.ContainsKey(MainVersion))
+                    if (Tmp[0].StartsWith("v", true, CI))
                     {
-                        MainVersionsList.TryGetValue(MainVersion, out ListItem);
-                        ListItem.Add(Item);
-                    }
-                    else
-                    {
-                        ListItem.Add(Item);
-                        MainVersionsList.Add(MainVersion, ListItem);
-                    }
+                        Tmp[0] = formatFirst(Tmp[0]);
 
+                        string MainVersion = Tmp[0];
+
+                        Item = new Item();
+
+                        Item.FullName = FullName;
+                        Item.SplitName = Tmp;
+                        
+                        List<Item> ListItem = new List<Item>();
+                        if (MainVersionsList.ContainsKey(MainVersion))
+                        {
+                            MainVersionsList.TryGetValue(MainVersion, out ListItem);
+                            ListItem.Add(Item);
+                        }
+                        else
+                        {
+                            ListItem.Add(Item);
+                            MainVersionsList.Add(MainVersion, ListItem);
+                        }
+                    }
                 }
-
             }
+            catch (Exception e)
+            {
+                Program.LOG.Error("Error",e);
+            }
+
         }
 
         private string formatFirst(string value)
