@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SharpKernelUpdate
 {
-    public partial class Form1 : Form
+    public partial class SharpKernelUpdateForm : Form
     {
-        public Form1()
+        public SharpKernelUpdateForm()
         {
             InitializeComponent();
         }

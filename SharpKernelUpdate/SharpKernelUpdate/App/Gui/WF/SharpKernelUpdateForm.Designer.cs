@@ -1,6 +1,7 @@
 ﻿namespace SharpKernelUpdate
 {
-    partial class Form1
+    partial class SharpKernelUpdateForm
+
     {
         /// <summary>
         /// Variabile di progettazione necessaria.
@@ -28,9 +29,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // SharpKernelUpdateForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(755, 496);
+            this.Name = "SharpKernelUpdateForm";
+            this.Text = "SharpKernelUpdateForm";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
