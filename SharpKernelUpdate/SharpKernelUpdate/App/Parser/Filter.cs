@@ -8,7 +8,7 @@ namespace SharpKernelUpdate.App.Parser
 {
     class Filter
     {
-        private Boolean IsOnlyStableVersion(Boolean IsOnlyStableVersion, String Value)
+        public static Boolean StableVersion(Boolean IsOnlyStableVersion, String Value)
         {
             if (IsOnlyStableVersion)
             {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Model
 {
-    class Item
-    {
-        public string FullName;
-        public string[] SplitName;
-    }
+	class Item
+	{
+		public string FullName;
+		public string[] SplitName;
+	}
 }

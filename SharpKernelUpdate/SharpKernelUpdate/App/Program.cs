@@ -21,9 +21,9 @@ namespace SharpKernelUpdate
         {
 
             LOG.Info("START");
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SharpKernelUpdateForm());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new SharpKernelUpdateForm());
 
             //string Pippo = "v3.111.222.333.";
 
@@ -34,8 +34,8 @@ namespace SharpKernelUpdate
             //Console.WriteLine(s);
             //}
 
-            //Parser Parser = new Parser();
-            //Parser.getItems();
+            Parser Parser = new Parser();
+            Parser.getItems();
             LOG.Info("STOP");
         }
     }

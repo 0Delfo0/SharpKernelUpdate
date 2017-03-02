@@ -10,79 +10,87 @@ using System.Net;
 
 namespace SharpKernelUpdate.App.Parser
 {
-    class Parser
-    {
-        public static string BaseUrl = "http://kernel.ubuntu.com/~kernel-ppa/mainline/";
+	class Parser
+	{
+		public static string BaseUrl = "http://kernel.ubuntu.com/~kernel-ppa/mainline/";
 
-        private static SortedList<string, List<Item>> MainVersionsList = new SortedList<string, List<Item>>();
-        private static CultureInfo CI = new CultureInfo("it-IT");
+		private static SortedList<string, List<Item>> MainVersionsList = new SortedList<string, List<Item>>();
+		private static CultureInfo CI = new CultureInfo("it-IT");
 
-        public string GetCall(String Url) 
-        {
-            WebRequest request = WebRequest.Create(Url);
-            WebResponse response = request.GetResponse();
-            Stream dataStream = response.GetResponseStream();
+		public string GetCall(string Url)
+		{
+			WebRequest request = WebRequest.Create(Url);
+			WebResponse response = request.GetResponse();
+			Stream dataStream = response.GetResponseStream();
 
-            StreamReader reader = new StreamReader(dataStream);
-            string responseFromServer = reader.ReadToEnd();
-            reader.Close();
-            response.Close();
-            return responseFromServer;
-        }
+			StreamReader reader = new StreamReader(dataStream);
+			string responseFromServer = reader.ReadToEnd();
+			reader.Close();
+			response.Close();
+			return responseFromServer;
+		}
 
-        //public List<Item> getItems()
-        public void getItems()
-        {
-            try
-            {
-                HtmlParser HtmlParser = new HtmlParser();
-                IHtmlDocument IHtmlDocument = HtmlParser.Parse(GetCall(BaseUrl));
-                IHtmlCollection<IElement> Links = IHtmlDocument.Links;
+		//public List<Item> getItems()
+		public void getItems()
+		{
+			try
+			{
+				HtmlParser HtmlParser = new HtmlParser();
+				IHtmlDocument IHtmlDocument = HtmlParser.Parse(GetCall(BaseUrl));
+				IHtmlCollection<IElement> Links = IHtmlDocument.Links;
 
-                Item Item;
+				Item Item;
 
-                foreach (IElement Link in Links)
-                {
-                    string FullName = Link.TextContent;
-                    string[] Tmp = FullName.Split('.');
+				foreach (IElement Link in Links)
+				{
+					string FullName = Link.TextContent;
+					string[] Tmp = FullName.Split('.');
 
-                    if (Tmp[0].StartsWith("v", true, CI))
-                    {
-                        Tmp[0] = formatFirst(Tmp[0]);
+					if (Tmp[0].StartsWith("v", true, CI))
+					{
+						Tmp[0] = formatFirst(Tmp[0]);
 
-                        string MainVersion = Tmp[0];
+						string MainVersion = Tmp[0];
 
-                        Item = new Item();
+						Item = new Item();
 
-                        Item.FullName = FullName;
-                        Item.SplitName = Tmp;
-                        
-                        List<Item> ListItem = new List<Item>();
-                        if (MainVersionsList.ContainsKey(MainVersion))
-                        {
-                            MainVersionsList.TryGetValue(MainVersion, out ListItem);
-                            ListItem.Add(Item);
-                        }
-                        else
-                        {
-                            ListItem.Add(Item);
-                            MainVersionsList.Add(MainVersion, ListItem);
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Program.LOG.Error("Error",e);
-            }
+						Item.FullName = FullName;
+						Item.SplitName = Tmp;
 
-        }
+						List<Item> ListItem = new List<Item>();
+						if (MainVersionsList.ContainsKey(MainVersion))
+						{
+							MainVersionsList.TryGetValue(MainVersion, out ListItem);
+							ListItem.Add(Item);
+						}
+						else
+						{
+							ListItem.Add(Item);
+							MainVersionsList.Add(MainVersion, ListItem);
+						}
+					}
+				}
 
-        private string formatFirst(string value)
-        {
-            return value.Trim('v');
+				//foreach (var s in MainVersionsList.Values)
+				//{
+				//	foreach (var q in s) {
+				//		Program.LOG.Info(q.ToString());
+				//	}
+				//}
 
-        }
+			}
+			catch (Exception e)
+			{
+				Program.LOG.Error("Error", e);
+			}
 
-    }
+		}
+
+		private string formatFirst(string value)
+		{
+			return value.Trim('v');
+
+		}
+
+	}
 }
