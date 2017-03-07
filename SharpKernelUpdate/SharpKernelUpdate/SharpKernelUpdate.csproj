@@ -68,8 +68,10 @@
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\SharpKernelUpdate.App.Gui.GTK.SharpKernelUpdateWindow.cs" />
+    <Compile Include="App\Gui\Configurator.cs" />
     <Compile Include="App\Gui\GTK\SharpKernelUpdateWindow.cs" />
+    <Compile Include="gtk-gui\SharpKernelUpdate.SharpKernelUpdateWindow.cs" />
+    <Compile Include="App\Gui\GTK\Component.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\App.config" />

@@ -5,47 +5,14 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../bin/Release/SharpKernelUpdate.exe" internal="true" />
+    <widget-library name="../bin/Debug/SharpKernelUpdate.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="SharpKernelUpdate.App.Gui.GTK.SharpKernelUpdateWindow" design-size="793 567">
+  <widget class="Gtk.Window" id="SharpKernelUpdate.SharpKernelUpdateWindow" design-size="400 300">
     <property name="MemberName" />
     <property name="Title" translatable="yes">SharpKernelUpdateWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
-    <property name="BorderWidth">51</property>
     <child>
-      <widget class="Gtk.Frame" id="frame1">
-        <property name="MemberName" />
-        <property name="ShadowType">None</property>
-        <child>
-          <widget class="Gtk.Alignment" id="GtkAlignment">
-            <property name="MemberName" />
-            <property name="Xalign">0</property>
-            <property name="Yalign">0</property>
-            <property name="LeftPadding">4</property>
-            <child>
-              <widget class="Gtk.CheckButton" id="stableVersion">
-                <property name="MemberName">ciao</property>
-                <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Stable version</property>
-                <property name="Active">True</property>
-                <property name="DrawIndicator">True</property>
-                <property name="HasLabel">True</property>
-                <property name="UseUnderline">True</property>
-              </widget>
-            </child>
-          </widget>
-        </child>
-        <child>
-          <widget class="Gtk.Label" id="GtkLabel1">
-            <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">&lt;b&gt;GtkFrame&lt;/b&gt;</property>
-            <property name="UseMarkup">True</property>
-          </widget>
-          <packing>
-            <property name="type">label_item</property>
-          </packing>
-        </child>
-      </widget>
+      <placeholder />
     </child>
   </widget>
 </stetic-interface>

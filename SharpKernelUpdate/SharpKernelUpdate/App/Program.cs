@@ -2,7 +2,6 @@
 using SharpKernelUpdate.App.Parser;
 using System;
 using Gtk;
-using SharpKernelUpdate.App.Gui.GTK;
 
 namespace SharpKernelUpdate
 {
@@ -41,8 +40,8 @@ namespace SharpKernelUpdate
 			//Console.WriteLine(s);
 			//}
 
-			Parser Parser = new Parser();
-			Parser.getItems();
+			var parser = new Parser();
+			parser.getItems();
 			LOG.Info("STOP");
 		}
 	}

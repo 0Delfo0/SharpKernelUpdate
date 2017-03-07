@@ -8,7 +8,7 @@ namespace SharpKernelUpdate.App.Model
 {
 	class Item
 	{
-		public string FullName;
-		public string[] SplitName;
+		public string fullName;
+		public string[] splitName;
 	}
 }

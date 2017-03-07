@@ -14,17 +14,16 @@ namespace SharpKernelUpdate.App.Parser
 	{
 		public static string BaseUrl = "http://kernel.ubuntu.com/~kernel-ppa/mainline/";
 
-		private static SortedList<string, List<Item>> MainVersionsList = new SortedList<string, List<Item>>();
-		private static CultureInfo CI = new CultureInfo("it-IT");
+		private static SortedList<string, List<Item>> mainVersionsList = new SortedList<string, List<Item>>();
 
-		public string GetCall(string Url)
+		public static string GetCall(Parser instance, string Url)
 		{
-			WebRequest request = WebRequest.Create(Url);
-			WebResponse response = request.GetResponse();
-			Stream dataStream = response.GetResponseStream();
+			var request = WebRequest.Create(Url);
+			var response = request.GetResponse();
+			var dataStream = response.GetResponseStream();
 
-			StreamReader reader = new StreamReader(dataStream);
-			string responseFromServer = reader.ReadToEnd();
+			var reader = new StreamReader(dataStream);
+			var responseFromServer = reader.ReadToEnd();
 			reader.Close();
 			response.Close();
 			return responseFromServer;
@@ -35,38 +34,38 @@ namespace SharpKernelUpdate.App.Parser
 		{
 			try
 			{
-				HtmlParser HtmlParser = new HtmlParser();
-				IHtmlDocument IHtmlDocument = HtmlParser.Parse(GetCall(BaseUrl));
-				IHtmlCollection<IElement> Links = IHtmlDocument.Links;
+				var htmlParser = new HtmlParser();
+				var iHtmlDocument = htmlParser.Parse(Parser.GetCall(this, BaseUrl));
+				var links = iHtmlDocument.Links;
 
-				Item Item;
+				Item item;
 
-				foreach (IElement Link in Links)
+				foreach (IElement link in links)
 				{
-					string FullName = Link.TextContent;
-					string[] Tmp = FullName.Split('.');
+					string fullName = link.TextContent;
+					var tmp = fullName.Split('.');
 
-					if (Tmp[0].StartsWith("v", true, CI))
+					if (tmp[0].StartsWith("v", StringComparison.CurrentCultureIgnoreCase))
 					{
-						Tmp[0] = formatFirst(Tmp[0]);
+						tmp[0] = Filter.FormatFirst(tmp[0]);
 
-						string MainVersion = Tmp[0];
+						string mainVersion = tmp[0];
 
-						Item = new Item();
+						item = new Item();
 
-						Item.FullName = FullName;
-						Item.SplitName = Tmp;
+						item.fullName = fullName;
+						item.splitName = tmp;
 
-						List<Item> ListItem = new List<Item>();
-						if (MainVersionsList.ContainsKey(MainVersion))
+						var listItem = new List<Item>();
+						if (mainVersionsList.ContainsKey(mainVersion))
 						{
-							MainVersionsList.TryGetValue(MainVersion, out ListItem);
-							ListItem.Add(Item);
+							mainVersionsList.TryGetValue(mainVersion, out listItem);
+							listItem.Add(item);
 						}
 						else
 						{
-							ListItem.Add(Item);
-							MainVersionsList.Add(MainVersion, ListItem);
+							listItem.Add(item);
+							mainVersionsList.Add(mainVersion, listItem);
 						}
 					}
 				}
@@ -86,11 +85,7 @@ namespace SharpKernelUpdate.App.Parser
 
 		}
 
-		private string formatFirst(string value)
-		{
-			return value.Trim('v');
-
-		}
+	
 
 	}
 }

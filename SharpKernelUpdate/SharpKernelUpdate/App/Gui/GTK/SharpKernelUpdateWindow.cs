@@ -1,6 +1,7 @@
-﻿using Gtk;
+﻿using System;
+using Gtk;
 
-namespace SharpKernelUpdate.App.Gui.GTK
+namespace SharpKernelUpdate
 {
 	public partial class SharpKernelUpdateWindow : Gtk.Window
 	{
@@ -8,13 +9,17 @@ namespace SharpKernelUpdate.App.Gui.GTK
 				base(Gtk.WindowType.Toplevel)
 		{
 
+			var component = new Component();
 
-			Build();
+			Add(component.AddComponent());
+			ShowAll();
+			this.Build();
+
+
 		}
 
-		protected void test(object sender, System.EventArgs e)
-		{
 
-		}
+
+
 	}
 }
