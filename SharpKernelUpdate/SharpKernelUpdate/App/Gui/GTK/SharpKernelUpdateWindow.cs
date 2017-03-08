@@ -8,18 +8,18 @@ namespace SharpKernelUpdate
 		public SharpKernelUpdateWindow() :
 				base(Gtk.WindowType.Toplevel)
 		{
+			Add(Components.AddComponent());
 
-			var component = new Component();
+			DeleteEvent += OnDeleteEvent;
 
-			Add(component.AddComponent());
 			ShowAll();
-			this.Build();
-
-
+			Build();
 		}
 
-
-
-
+		protected void OnDeleteEvent(object sender, DeleteEventArgs a)
+		{
+			Application.Quit();
+			a.RetVal = true;
+		}
 	}
 }

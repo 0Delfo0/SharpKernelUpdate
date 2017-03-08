@@ -71,7 +71,8 @@
     <Compile Include="App\Gui\Configurator.cs" />
     <Compile Include="App\Gui\GTK\SharpKernelUpdateWindow.cs" />
     <Compile Include="gtk-gui\SharpKernelUpdate.SharpKernelUpdateWindow.cs" />
-    <Compile Include="App\Gui\GTK\Component.cs" />
+    <Compile Include="App\Gui\GTK\Components.cs" />
+    <Compile Include="App\Gui\GTK\GuiLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\App.config" />
