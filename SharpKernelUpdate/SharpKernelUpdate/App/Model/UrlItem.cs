@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Model
 {
-	class Item
+	class UrlItem
 	{
 		public string fullName;
 		public string[] splitName;

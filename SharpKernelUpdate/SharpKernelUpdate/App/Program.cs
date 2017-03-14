@@ -40,9 +40,7 @@ namespace SharpKernelUpdate
 			//Console.WriteLine(s);
 			//}
 
-			var parser = new Parser();
-			parser.getItems();
-			LOG.Info("STOP");
+			
 		}
 	}
 }
