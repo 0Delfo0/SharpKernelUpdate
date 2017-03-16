@@ -3,26 +3,22 @@ using Gtk;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
-	public partial class SharpKernelUpdateWindow : Window
-	{
-		public SharpKernelUpdateWindow() :
-				base(WindowType.Toplevel)
-		{
-			Add(Components.AddComponent());
+    public partial class SharpKernelUpdateWindow : Window
+    {
+        public SharpKernelUpdateWindow() :
+                base(WindowType.Toplevel)
+        {
+            Add(Components.AddComponent());
 
-			DeleteEvent += OnDeleteEvent;
+            DeleteEvent += OnDeleteEvent;
 
-			ShowAll();
-			Build();
-		}
+            ShowAll();
+            Build();
+        }
 
 
         protected virtual void Build()
         {
-            
-            
-            
-            
             this.WindowPosition = ((global::Gtk.WindowPosition)(4));
             if ((this.Child != null))
             {
@@ -35,9 +31,9 @@ namespace SharpKernelUpdate.App.Gui.GTK
 
 
         protected void OnDeleteEvent(object sender, DeleteEventArgs a)
-		{
-			Application.Quit();
-			a.RetVal = true;
-		}
-	}
+        {
+            Application.Quit();
+            a.RetVal = true;
+        }
+    }
 }
