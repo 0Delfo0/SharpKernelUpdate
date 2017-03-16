@@ -3,10 +3,10 @@ using Gtk;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
-	public partial class SharpKernelUpdateWindow : Gtk.Window
+	public partial class SharpKernelUpdateWindow : Window
 	{
 		public SharpKernelUpdateWindow() :
-				base(Gtk.WindowType.Toplevel)
+				base(WindowType.Toplevel)
 		{
 			Add(Components.AddComponent());
 
