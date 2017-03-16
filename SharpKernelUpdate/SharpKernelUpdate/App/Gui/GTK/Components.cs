@@ -1,11 +1,14 @@
 ﻿using System;
 using Gtk;
-using SharpKernelUpdate.App.Parser;
+
 using System.Collections.Generic;
 using System.Linq;
 using SharpKernelUpdate.App.Model;
+using SharpKernelUpdate.App.Parsers;
+using System.Net;
+using System.Threading;
 
-namespace SharpKernelUpdate
+namespace SharpKernelUpdate.App.Gui.GTK
 {
     public class Components
     {
@@ -14,6 +17,23 @@ namespace SharpKernelUpdate
         private static HBox mainHBox1 = new HBox(false, 5);
         private static HBox mainHBox2 = new HBox(false, 5);
 
+
+
+        public static void Test()
+        {
+            var client = new WebClient();
+            var reset = new ManualResetEvent(false);
+            client.DownloadProgressChanged += (s, e) => Console.WriteLine("{0} percent complete", e.ProgressPercentage);
+            client.DownloadFileCompleted += (s, e) => Console.WriteLine("END");  reset.Set();
+
+
+
+            client.DownloadDataAsync(new Uri("http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.3/linux-headers-4.10.3-041003-generic-lpae_4.10.3-041003.201703142331_armhf.deb"));
+            //client.DownloadFileAsync(new Uri("http://myfilepathhere.com"), "file.name");
+            //Block till download completes
+            reset.WaitOne();
+
+        }
 
         public static Widget AddComponent()
         {
@@ -45,13 +65,22 @@ namespace SharpKernelUpdate
 
         static void OnClicked_Update(object sender, EventArgs args)
         {
+            //Test();
+
             var list = Parser.GetMainList();
 
             IEnumerable<IGrouping<string, UrlItem>> mainList = Filter.GetListElements(0, list);
 
+            var children = mainHBox2.Children;
+
+            foreach (var child in mainHBox2.Children)
+            {
+                child.Destroy();
+            }
+
             foreach (var i in mainList)
             {
-                var lb = new LinkButton(i.Key);
+                var lb = new LinkButton(i.Key, i.Key);
                 mainHBox2.PackStart(lb, false, false, 1);
                 lb.Show();
             }

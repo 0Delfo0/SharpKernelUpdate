@@ -1,4 +1,4 @@
-﻿namespace SharpKernelUpdate
+﻿namespace SharpKernelUpdate.App.Gui
 {
 	public static class GuiLabel
 	{

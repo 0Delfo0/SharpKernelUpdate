@@ -59,20 +59,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\Model\UrlItem.cs" />
-    <Compile Include="App\Parser\Filter.cs" />
-    <Compile Include="App\Parser\Parser.cs" />
+    <Compile Include="App\Parsers\Filter.cs" />
+    <Compile Include="App\Parsers\Parser.cs" />
     <Compile Include="App\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-    <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="App\Gui\Configurator.cs" />
     <Compile Include="App\Gui\GTK\SharpKernelUpdateWindow.cs" />
-    <Compile Include="gtk-gui\SharpKernelUpdate.SharpKernelUpdateWindow.cs" />
     <Compile Include="App\Gui\GTK\Components.cs" />
-    <Compile Include="App\Gui\GTK\GuiLabel.cs" />
+    <Compile Include="App\Gui\GuiLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\App.config" />

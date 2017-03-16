@@ -1,7 +1,7 @@
 ﻿using log4net;
-using SharpKernelUpdate.App.Parser;
 using System;
 using Gtk;
+using SharpKernelUpdate.App.Gui.GTK;
 
 namespace SharpKernelUpdate
 {
@@ -25,6 +25,7 @@ namespace SharpKernelUpdate
 
 
 			Application.Init();
+
 
 			var sharpKernelUpdateWindow = new SharpKernelUpdateWindow();
 			sharpKernelUpdateWindow.Show();

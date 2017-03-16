@@ -1,11 +1,12 @@
-﻿using SharpKernelUpdate.App.Model;
+﻿using SharpKernelUpdate.App.Gui;
+using SharpKernelUpdate.App.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharpKernelUpdate.App.Parser
+namespace SharpKernelUpdate.App.Parsers
 {
     class Filter
     {
