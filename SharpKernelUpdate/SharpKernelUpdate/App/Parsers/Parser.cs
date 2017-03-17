@@ -59,8 +59,8 @@ namespace SharpKernelUpdate.App.Parsers
 
 						var urlItem = new UrlItem()
 						{
-							fullName = fullName,
-							splitName = tmp
+							FullName = fullName,
+							SplitName = tmp
 						};
 
 						MAIN_LIST.Add(urlItem);

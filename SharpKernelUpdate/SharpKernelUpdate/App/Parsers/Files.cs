@@ -24,7 +24,7 @@ namespace SharpKernelUpdate.App.Parsers
                 
         public static bool DownloadFile(ProgressBar progressBar, UrlItem urlItem)
         {
-            return DownloadFile(progressBar, urlItem.uri, urlItem.filePath, urlItem.fileName);
+            return DownloadFile(progressBar, urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
 
         public static bool DownloadFile(ProgressBar progressBar, string uri, string filePath, string fileName)

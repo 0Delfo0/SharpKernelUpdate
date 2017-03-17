@@ -24,7 +24,7 @@ namespace SharpKernelUpdate.App.Parsers
 
         public bool DownloadFile(ProgressBar progressBar, UrlItem urlItem)
         {
-            return DownloadFile(progressBar, urlItem.uri, urlItem.filePath, urlItem.fileName);
+            return DownloadFile(progressBar, urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
 
         public bool DownloadFile(ProgressBar progressBar, string uri, string filePath, string fileName)
@@ -56,7 +56,7 @@ namespace SharpKernelUpdate.App.Parsers
 
         private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs args)
         {
-            urlItem.isReady = true;
+            urlItem.IsReady = true;
         }
 
 

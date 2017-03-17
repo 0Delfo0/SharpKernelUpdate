@@ -37,7 +37,7 @@ namespace SharpKernelUpdate.App.Parsers
 
         public static IEnumerable<IGrouping<string, UrlItem>> GetListElements(int level, List<UrlItem> listUrlItem)
         {
-            var p = from i in listUrlItem group i by i.splitName[level];
+            var p = from i in listUrlItem group i by i.SplitName[level];
             return p;
         }
     }
