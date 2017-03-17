@@ -10,5 +10,9 @@ namespace SharpKernelUpdate.App.Model
 	{
 		public string fullName;
 		public string[] splitName;
-	}
+        public string uri;
+        public string filePath;
+        public string fileName;
+        public bool isReady;
+    }
 }
