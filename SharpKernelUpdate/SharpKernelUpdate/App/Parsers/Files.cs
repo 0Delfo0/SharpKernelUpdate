@@ -1,12 +1,8 @@
 ﻿using Gtk;
 using SharpKernelUpdate.App.Model;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Parsers
 {

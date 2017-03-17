@@ -25,7 +25,7 @@ namespace SharpKernelUpdate.App.Gui.GTK
 
 
 
-            //var reset = new ManualResetEvent(false);
+            var reset = new ManualResetEvent(false);
             //client.DownloadProgressChanged += (s, e) => { Console.WriteLine("{0} percent complete", e.ProgressPercentage); progressBar.Fraction = e.ProgressPercentage; };
             //client.DownloadFileCompleted += (s, e) => Console.WriteLine("END"); reset.Set();
 

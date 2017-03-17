@@ -1,20 +1,17 @@
 ﻿using Gtk;
 using SharpKernelUpdate.App.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Deployment.Application;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace SharpKernelUpdate.App.Parsers
 {
     class Downloader
     {
-        ProgressBar progressBar;
-        UrlItem urlItem;
+        private ProgressBar progressBar;
+        private UrlItem urlItem;
+        private ManualResetEvent reset;
 
         public Downloader(UrlItem urlItem)
         {
@@ -22,14 +19,15 @@ namespace SharpKernelUpdate.App.Parsers
             this.progressBar = new ProgressBar();
         }
 
-        public bool DownloadFile(ProgressBar progressBar, UrlItem urlItem)
+        public bool DownloadFile(UrlItem urlItem)
         {
-            return DownloadFile(progressBar, urlItem.Uri, urlItem.FilePath, urlItem.FileName);
+            return DownloadFile(urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
 
-        public bool DownloadFile(ProgressBar progressBar, string uri, string filePath, string fileName)
+        public bool DownloadFile(string uri, string filePath, string fileName)
         {
             bool downloadComplete = false;
+            reset = new ManualResetEvent(false);
 
             var client = new WebClient();
 
@@ -44,7 +42,9 @@ namespace SharpKernelUpdate.App.Parsers
             //    //Application.DoEvents();
             //}
 
-            downloadComplete = false;
+            reset.WaitOne();
+
+            downloadComplete = true;
 
             return downloadComplete;
         }
@@ -57,6 +57,7 @@ namespace SharpKernelUpdate.App.Parsers
         private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs args)
         {
             urlItem.IsReady = true;
+            reset.Set();
         }
 
 
