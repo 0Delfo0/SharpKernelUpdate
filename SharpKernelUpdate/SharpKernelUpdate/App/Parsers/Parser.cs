@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
+using SharpKernelUpdate.App.Gui;
 using SharpKernelUpdate.App.Model;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,6 @@ namespace SharpKernelUpdate.App.Parsers
 {
 	static class Parser
 	{
-		public static string BaseUrl = "http://kernel.ubuntu.com/~kernel-ppa/mainline/";
-
 		static List<UrlItem> MAIN_LIST;
 
 		public static List<UrlItem> GetMainList()
@@ -45,7 +44,7 @@ namespace SharpKernelUpdate.App.Parsers
 			try
 			{
 				var htmlParser = new HtmlParser();
-				var iHtmlDocument = htmlParser.Parse(GetCall(BaseUrl));
+				var iHtmlDocument = htmlParser.Parse(GetCall(Configurator.baseUrl));
 				var links = iHtmlDocument.Links;
 
 				foreach (IElement link in links)

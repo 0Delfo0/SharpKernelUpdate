@@ -35,13 +35,6 @@ namespace SharpKernelUpdate.App.Parsers
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleted);
             client.DownloadFileAsync(new Uri(uri), Files.AddPathSeparator(filePath) + fileName);
 
-
-            // TODO: while 
-            //while (!downloadComplete)
-            //{
-            //    //Application.DoEvents();
-            //}
-
             reset.WaitOne();
 
             downloadComplete = true;

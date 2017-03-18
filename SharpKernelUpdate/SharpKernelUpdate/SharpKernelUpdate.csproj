@@ -73,6 +73,7 @@
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Gui\GTK\TreCombo.cs" />
     <Compile Include="App\Model\UrlItem.cs" />
     <Compile Include="App\Parsers\Downloader.cs" />
     <Compile Include="App\Parsers\Files.cs" />

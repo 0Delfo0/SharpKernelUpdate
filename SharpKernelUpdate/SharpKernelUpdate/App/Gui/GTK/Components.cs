@@ -15,45 +15,8 @@ namespace SharpKernelUpdate.App.Gui.GTK
     {
         private static VBox mainVBox = new VBox(false, 5);
         private static HBox mainHBox1 = new HBox(false, 5);
-        private static HBox mainHBox2 = new HBox(false, 5);
-
-        private static ProgressBar progressBar = new ProgressBar();
-
-        public static void Test()
-        {
-            var client = new WebClient();
-
-
-
-            var reset = new ManualResetEvent(false);
-            //client.DownloadProgressChanged += (s, e) => { Console.WriteLine("{0} percent complete", e.ProgressPercentage); progressBar.Fraction = e.ProgressPercentage; };
-            //client.DownloadFileCompleted += (s, e) => Console.WriteLine("END"); reset.Set();
-
-            client.DownloadProgressChanged += OnDownloadProgressChanged;
-            client.DownloadFileCompleted += OnDownloadFileCompleted;
-
-
-
-            //client.DownloadDataAsync(new Uri("http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.3/linux-headers-4.10.3-041003-generic-lpae_4.10.3-041003.201703142331_armhf.deb"));
-            client.DownloadFileAsync(new Uri("http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.3/linux-headers-4.10.3-041003-generic-lpae_4.10.3-041003.201703142331_armhf.deb"), "file.name");
-
-
-
-            //Block till download completes
-            //reset.WaitOne();
-
-        }
-        
-        static void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs args)
-        {
-            Console.WriteLine("{0} percent complete", args.ProgressPercentage);
-            progressBar.Fraction = (args.ProgressPercentage / 100);
-        }
-
-        static void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs args)
-        {
-            Console.WriteLine("END");
-        }
+        private static HBox mainHBox2_ProgressBar = new HBox(false, 5);
+        private static HBox mainHBox3 = new HBox(false, 5);
 
         public static Widget AddComponent()
         {
@@ -68,55 +31,44 @@ namespace SharpKernelUpdate.App.Gui.GTK
 
 
             mainHBox1.PackStart(new VSeparator());
-            mainHBox1.PackStart(progressBar);
-
-
 
             mainVBox.PackStart(mainHBox1, false, false, 1);
 
+            mainVBox.PackStart(new HSeparator());
 
-
+            mainHBox2_ProgressBar.PackStart(new ProgressBar(), true, true, 1);
+            mainVBox.PackStart(mainHBox2_ProgressBar, false, false, 1);
 
             mainVBox.PackStart(new HSeparator());
-            mainVBox.PackStart(mainHBox2, false, false, 1);
+            mainVBox.PackStart(mainHBox3, false, false, 1);
 
             return mainVBox;
         }
 
-
-
         static Widget CreateButton_Update()
         {
-            var b = new Button(GuiLabel.Update);
-            b.SetSizeRequest(75, 30);
+            var b = new Button(GuiLabel.Update);        
             b.Clicked += OnClicked_Update;
-
             return b;
         }
 
         static void OnClicked_Update(object sender, EventArgs args)
         {
-            Test();
-
-            var list = Parser.GetMainList();
-
-            var mainList = Filter.GetListElements(0, list);
-
-            var children = mainHBox2.Children;
-
-            foreach (var child in mainHBox2.Children)
-            {
-                child.Destroy();
-            }
-
-            foreach (var i in mainList)
-            {
-                var lb = new LinkButton(i.Key, i.Key);
-                mainHBox2.PackStart(lb, false, false, 1);
-                lb.Show();
-            }
+            mainHBox3.PackStart(new TreCombo().Create(), false, false, 1);
         }
 
+        private static void Cb_Changed(object sender, EventArgs e)
+        {
+            ComboBox cb = (ComboBox)sender;
+            int index = cb.Active;            
+        }
+
+        static Widget CreateComboBox(List<UrlItem> listUrlItem)
+        {
+            var cb = new ComboBox();
+            //cb. += OnClicked_Update;
+            return cb;
+        }
 
         static Widget CreateCheckButton_OnlyStableVersion()
         {
