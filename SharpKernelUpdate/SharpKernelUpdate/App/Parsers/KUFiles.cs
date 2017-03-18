@@ -6,7 +6,7 @@ using System.Net;
 
 namespace SharpKernelUpdate.App.Parsers
 {
-    static class Files
+    static class KUFiles
     {
         public static bool SaveFile(string filePath, string fileName)
         {
@@ -18,7 +18,7 @@ namespace SharpKernelUpdate.App.Parsers
             return retVal;
         }
                 
-        public static bool DownloadFile(ProgressBar progressBar, UrlItem urlItem)
+        public static bool DownloadFile(ProgressBar progressBar, KUUrlItem urlItem)
         {
             return DownloadFile(progressBar, urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }

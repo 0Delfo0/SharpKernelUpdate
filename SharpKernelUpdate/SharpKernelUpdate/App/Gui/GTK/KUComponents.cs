@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
-    public class Components
+    public class KUComponents
     {
         private static VBox mainVBox = new VBox(false, 5);
         private static HBox mainHBox1 = new HBox(false, 5);
@@ -47,14 +47,14 @@ namespace SharpKernelUpdate.App.Gui.GTK
 
         static Widget CreateButton_Update()
         {
-            var b = new Button(GuiLabel.Update);        
+            var b = new Button(KUGuiLabel.Update);        
             b.Clicked += OnClicked_Update;
             return b;
         }
 
         static void OnClicked_Update(object sender, EventArgs args)
         {
-            mainHBox3.PackStart(new TreCombo().Create(), false, false, 1);
+            mainVBox.PackStart(new KUTreCombo().Create(), false, false, 1);
         }
 
         private static void Cb_Changed(object sender, EventArgs e)
@@ -63,7 +63,7 @@ namespace SharpKernelUpdate.App.Gui.GTK
             int index = cb.Active;            
         }
 
-        static Widget CreateComboBox(List<UrlItem> listUrlItem)
+        static Widget CreateComboBox(List<KUUrlItem> listUrlItem)
         {
             var cb = new ComboBox();
             //cb. += OnClicked_Update;
@@ -72,7 +72,7 @@ namespace SharpKernelUpdate.App.Gui.GTK
 
         static Widget CreateCheckButton_OnlyStableVersion()
         {
-            var cb = new CheckButton(GuiLabel.OnlyStableVersion);
+            var cb = new CheckButton(KUGuiLabel.OnlyStableVersion);
             cb.Toggled += OnToggled_OnlyStableVersion;
 
             return cb;
@@ -83,26 +83,26 @@ namespace SharpKernelUpdate.App.Gui.GTK
             var cb = (CheckButton)sender;
             if (cb.Active)
             {
-                Configurator.isOnlyStableVersion = true;
+                KUConfigurator.IsOnlyStableVersion = true;
             }
             else
             {
-                Configurator.isOnlyStableVersion = false;
+                KUConfigurator.IsOnlyStableVersion = false;
             }
 
-            Program.LOG.Debug("Configurator.isOnlyStableVersion: " + Configurator.isOnlyStableVersion);
+            Program.LOG.Debug("Configurator.isOnlyStableVersion: " + KUConfigurator.IsOnlyStableVersion);
         }
 
         static void CreateRadioButtons_Architecture(Box container)
         {
-            var rb64 = new RadioButton(GuiLabel.Architecture_x64);
+            var rb64 = new RadioButton(KUGuiLabel.Architecture_x64);
             container.PackStart(rb64, false, false, 1);
             rb64.Toggled += OnToggled_Architecture;
 
-            var rb32 = new RadioButton(rb64, GuiLabel.Architecture_x32);
+            var rb32 = new RadioButton(rb64, KUGuiLabel.Architecture_x32);
             container.PackStart(rb32, false, false, 1);
 
-            Configurator.is64Architecture = true;
+            KUConfigurator.Is64Architecture = true;
         }
 
         static void OnToggled_Architecture(object sender, EventArgs args)
@@ -110,13 +110,13 @@ namespace SharpKernelUpdate.App.Gui.GTK
             var rb = (RadioButton)sender;
             if (rb.Active)
             {
-                Configurator.is64Architecture = true;
+                KUConfigurator.Is64Architecture = true;
             }
             else
             {
-                Configurator.is64Architecture = false;
+                KUConfigurator.Is64Architecture = false;
             }
-            Program.LOG.Debug("Configurator.is64Architecture: " + Configurator.is64Architecture);
+            Program.LOG.Debug("Configurator.is64Architecture: " + KUConfigurator.Is64Architecture);
         }
     }
 }

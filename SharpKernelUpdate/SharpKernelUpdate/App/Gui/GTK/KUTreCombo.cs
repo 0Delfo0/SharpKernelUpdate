@@ -9,36 +9,42 @@ using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
-    class TreCombo
+    class KUTreCombo
     {
-        static HBox _hBox_Combo = new HBox(false, 5);
+        HBox _hBox_Combo = new HBox(false, 5);
 
-        List<UrlItem> _mainList = Parser.GetMainList();
-        IEnumerable<IGrouping<string, UrlItem>> _groupingList;
-        List<UrlItem> _currentList = new List<UrlItem>();
+        List<KUUrlItem> _mainList = KUParser.GetMainList();
+        IEnumerable<IGrouping<string, KUUrlItem>> _groupingList;
+        List<KUUrlItem> _currentList = new List<KUUrlItem>();
 
         int _COMBO_INDEX = 0;
 
         public Widget Create()
         {
             Create(_mainList);
+            _hBox_Combo.Show();
             return _hBox_Combo;
         }
 
-
-        void Create(List<UrlItem> urlItemList)
+        public Widget GetWidget()
         {
-            _groupingList = Filter.GetListElements(_COMBO_INDEX, urlItemList);
+            return _hBox_Combo;
+        }
 
-            var children = _hBox_Combo.Children;
-            foreach (var child in _hBox_Combo.Children)
-            {
-                child.Destroy();
-            }
+        void Create(List<KUUrlItem> urlItemList)
+        {
+            var groupingList = KUFilter.GetListElements(_COMBO_INDEX, urlItemList);
+            _groupingList = groupingList;
+
+            //var children = _hBox_Combo.Children;
+            //foreach (var child in _hBox_Combo.Children)
+            //{
+            //    child.Destroy();
+            //}
 
             List<string> values = new List<string>();
 
-            foreach (var i in _groupingList)
+            foreach (var i in groupingList)
             {
                 values.Add(i.Key);
             }
@@ -53,9 +59,8 @@ namespace SharpKernelUpdate.App.Gui.GTK
         {
             ComboBox cb = (ComboBox)sender;
             int index = cb.Active;
-
-            var element = _groupingList.ElementAt(index);
-            var tmpList = element.ToList();
+            
+            var element = _groupingList.ElementAt(index);         
 
             _COMBO_INDEX++;
             Create(element.ToList());

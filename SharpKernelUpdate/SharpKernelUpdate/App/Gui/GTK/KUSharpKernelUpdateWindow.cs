@@ -3,12 +3,12 @@ using Gtk;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
-    public partial class SharpKernelUpdateWindow : Window
+    public partial class KUSharpKernelUpdateWindow : Window
     {
-        public SharpKernelUpdateWindow() :
+        public KUSharpKernelUpdateWindow() :
                 base(WindowType.Toplevel)
         {
-            Add(Components.AddComponent());
+            Add(KUComponents.AddComponent());
 
             DeleteEvent += OnDeleteEvent;
 

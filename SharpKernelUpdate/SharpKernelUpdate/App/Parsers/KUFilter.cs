@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Parsers
 {
-    class Filter
+    class KUFilter
     {
-        public static Boolean StableVersion(String Value)
+        public static bool StableVersion(string value)
         {
-            if (Configurator.isOnlyStableVersion)
+            if (KUConfigurator.IsOnlyStableVersion)
             {
-                if (Value.IndexOf("rc", StringComparison.OrdinalIgnoreCase) >= 0)
+                if (value.IndexOf("rc", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     return false;
                 }
@@ -29,13 +29,26 @@ namespace SharpKernelUpdate.App.Parsers
             }
         }
 
+        public static bool StableVersion(string[] values)
+        {
+            foreach (string s in values)
+            {
+                var isStableVersion = StableVersion(s);
+                if (!isStableVersion)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
         public static string FormatFirst(string value)
         {
             return value.Trim('v');
         }
 
-
-        public static IEnumerable<IGrouping<string, UrlItem>> GetListElements(int level, List<UrlItem> listUrlItem)
+        public static IEnumerable<IGrouping<string, KUUrlItem>> GetListElements(int level, List<KUUrlItem> listUrlItem)
         {
             var p = from i in listUrlItem group i by i.SplitName[level];
             return p;

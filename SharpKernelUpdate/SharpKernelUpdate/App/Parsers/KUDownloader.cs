@@ -7,19 +7,19 @@ using System.Threading;
 
 namespace SharpKernelUpdate.App.Parsers
 {
-    class Downloader
+    class KUDownloader
     {
         private ProgressBar progressBar;
-        private UrlItem urlItem;
+        private KUUrlItem urlItem;
         private ManualResetEvent reset;
 
-        public Downloader(UrlItem urlItem)
+        public KUDownloader(KUUrlItem urlItem)
         {
             this.urlItem = urlItem;
             this.progressBar = new ProgressBar();
         }
 
-        public bool DownloadFile(UrlItem urlItem)
+        public bool DownloadFile(KUUrlItem urlItem)
         {
             return DownloadFile(urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
@@ -33,7 +33,7 @@ namespace SharpKernelUpdate.App.Parsers
 
             client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleted);
-            client.DownloadFileAsync(new Uri(uri), Files.AddPathSeparator(filePath) + fileName);
+            client.DownloadFileAsync(new Uri(uri), KUFiles.AddPathSeparator(filePath) + fileName);
 
             reset.WaitOne();
 

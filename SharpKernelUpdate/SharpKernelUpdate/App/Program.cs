@@ -27,7 +27,7 @@ namespace SharpKernelUpdate
 			Application.Init();
 
 
-			var sharpKernelUpdateWindow = new SharpKernelUpdateWindow();
+			var sharpKernelUpdateWindow = new KUSharpKernelUpdateWindow();
 			sharpKernelUpdateWindow.Show();
 
 			Application.Run();

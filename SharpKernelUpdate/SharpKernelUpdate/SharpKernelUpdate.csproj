@@ -73,19 +73,19 @@
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\Gui\GTK\TreCombo.cs" />
-    <Compile Include="App\Model\UrlItem.cs" />
-    <Compile Include="App\Parsers\Downloader.cs" />
-    <Compile Include="App\Parsers\Files.cs" />
-    <Compile Include="App\Parsers\Filter.cs" />
-    <Compile Include="App\Parsers\Parser.cs" />
+    <Compile Include="App\Gui\GTK\KUTreCombo.cs" />
+    <Compile Include="App\Model\KUUrlItem.cs" />
+    <Compile Include="App\Parsers\KUDownloader.cs" />
+    <Compile Include="App\Parsers\KUFiles.cs" />
+    <Compile Include="App\Parsers\KUFilter.cs" />
+    <Compile Include="App\Parsers\KUParser.cs" />
     <Compile Include="App\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
-    <Compile Include="App\Gui\Configurator.cs" />
-    <Compile Include="App\Gui\GTK\SharpKernelUpdateWindow.cs" />
-    <Compile Include="App\Gui\GTK\Components.cs" />
-    <Compile Include="App\Gui\GuiLabel.cs" />
+    <Compile Include="App\Gui\KUConfigurator.cs" />
+    <Compile Include="App\Gui\GTK\KUSharpKernelUpdateWindow.cs" />
+    <Compile Include="App\Gui\GTK\KUComponents.cs" />
+    <Compile Include="App\Gui\KUGuiLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\App.config" />

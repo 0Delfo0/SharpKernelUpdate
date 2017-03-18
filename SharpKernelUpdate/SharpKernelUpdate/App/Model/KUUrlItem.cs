@@ -1,6 +1,6 @@
 ﻿namespace SharpKernelUpdate.App.Model
 {
-    class UrlItem
+    class KUUrlItem
 	{
         private string fullName;
         private string[] splitName;
