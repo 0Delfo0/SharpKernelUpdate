@@ -12,7 +12,7 @@ namespace SharpKernelUpdate.App.Parsers
     {
         public static bool StableVersion(string value)
         {
-            if (KUConfigurator.IsOnlyStableVersion)
+			if (Program.Configurator.IsOnlyStableVersion)
             {
                 if (value.IndexOf("rc", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
@@ -41,7 +41,6 @@ namespace SharpKernelUpdate.App.Parsers
             }
             return true;
         }
-
 
         public static string FormatFirst(string value)
         {

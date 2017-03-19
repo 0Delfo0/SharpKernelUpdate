@@ -52,9 +52,5 @@ namespace SharpKernelUpdate.App.Parsers
             urlItem.IsReady = true;
             reset.Set();
         }
-
-
     }
-
-
 }

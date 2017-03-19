@@ -83,14 +83,14 @@ namespace SharpKernelUpdate.App.Gui.GTK
             var cb = (CheckButton)sender;
             if (cb.Active)
             {
-                KUConfigurator.IsOnlyStableVersion = true;
+                Program.Configurator.IsOnlyStableVersion = true;
             }
             else
             {
-                KUConfigurator.IsOnlyStableVersion = false;
+                Program.Configurator.IsOnlyStableVersion = false;
             }
 
-            Program.LOG.Debug("Configurator.isOnlyStableVersion: " + KUConfigurator.IsOnlyStableVersion);
+            Program.LOG.Debug("Configurator.isOnlyStableVersion: " + Program.Configurator.IsOnlyStableVersion);
         }
 
         static void CreateRadioButtons_Architecture(Box container)
@@ -102,7 +102,7 @@ namespace SharpKernelUpdate.App.Gui.GTK
             var rb32 = new RadioButton(rb64, KUGuiLabel.Architecture_x32);
             container.PackStart(rb32, false, false, 1);
 
-            KUConfigurator.Is64Architecture = true;
+            Program.Configurator.Is64Architecture = true;
         }
 
         static void OnToggled_Architecture(object sender, EventArgs args)
@@ -110,13 +110,13 @@ namespace SharpKernelUpdate.App.Gui.GTK
             var rb = (RadioButton)sender;
             if (rb.Active)
             {
-                KUConfigurator.Is64Architecture = true;
+				Program.Configurator.Is64Architecture=true;
             }
             else
             {
-                KUConfigurator.Is64Architecture = false;
+                Program.Configurator.Is64Architecture = false;
             }
-            Program.LOG.Debug("Configurator.is64Architecture: " + KUConfigurator.Is64Architecture);
+            Program.LOG.Debug("Configurator.is64Architecture: " + Program.Configurator.Is64Architecture);
         }
     }
 }

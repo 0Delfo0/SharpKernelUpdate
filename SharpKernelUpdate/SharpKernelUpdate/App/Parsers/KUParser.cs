@@ -44,7 +44,7 @@ namespace SharpKernelUpdate.App.Parsers
             try
             {
                 var htmlParser = new HtmlParser();
-                var iHtmlDocument = htmlParser.Parse(GetCall(KUConfigurator.baseUrl));
+                var iHtmlDocument = htmlParser.Parse(GetCall(KUConfigurator.BaseUrl));
                 var links = iHtmlDocument.Links;
 
                 foreach (IElement link in links)
