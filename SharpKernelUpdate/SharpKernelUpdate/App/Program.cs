@@ -11,7 +11,7 @@ namespace SharpKernelUpdate
 		public static readonly ILog LOG = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 		public static readonly KUConfigurator Configurator = new KUConfigurator();
 
-		[STAThread]
+		    [STAThread]
 		static void Main()
 		{
 			LOG.Info("START");
