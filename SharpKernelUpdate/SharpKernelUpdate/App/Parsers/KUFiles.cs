@@ -17,7 +17,7 @@ namespace SharpKernelUpdate.App.Parsers
 
             return retVal;
         }
-                
+
         public static bool DownloadFile(ProgressBar progressBar, KUUrlItem urlItem)
         {
             return DownloadFile(progressBar, urlItem.Uri, urlItem.FilePath, urlItem.FileName);
@@ -36,7 +36,7 @@ namespace SharpKernelUpdate.App.Parsers
             };
 
             client.DownloadFileCompleted += (s, args) =>
-            {                
+            {
                 Console.WriteLine("END");
             };
 

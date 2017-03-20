@@ -1,13 +1,5 @@
-﻿using System;
-using Gtk;
-
-using System.Collections.Generic;
-using System.Linq;
-using SharpKernelUpdate.App.Model;
-using SharpKernelUpdate.App.Parsers;
-using System.Net;
-using System.Threading;
-using System.ComponentModel;
+﻿using Gtk;
+using System;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
@@ -24,11 +16,15 @@ namespace SharpKernelUpdate.App.Gui.GTK
 
             mainHBox1.PackStart(new VSeparator());
 
+            mainHBox1.PackStart(CreateCheckButton_LowLatency(), false, false, 1);
+
+            mainHBox1.PackStart(new VSeparator());
+
             CreateRadioButtons_Architecture(mainHBox1);
 
             mainHBox1.PackStart(new VSeparator());
-            mainHBox1.PackStart(CreateButton_Update(), false, false, 1);
 
+            mainHBox1.PackStart(CreateButton_Update(), false, false, 1);
 
             mainHBox1.PackStart(new VSeparator());
 
@@ -40,6 +36,7 @@ namespace SharpKernelUpdate.App.Gui.GTK
             mainVBox.PackStart(mainHBox2_ProgressBar, false, false, 1);
 
             mainVBox.PackStart(new HSeparator());
+
             mainVBox.PackStart(mainHBox3, false, false, 1);
 
             return mainVBox;
@@ -47,7 +44,7 @@ namespace SharpKernelUpdate.App.Gui.GTK
 
         static Widget CreateButton_Update()
         {
-            var b = new Button(KUGuiLabel.Update);        
+            var b = new Button(KUGuiLabel.Update);
             b.Clicked += OnClicked_Update;
             return b;
         }
@@ -57,22 +54,12 @@ namespace SharpKernelUpdate.App.Gui.GTK
             mainVBox.PackStart(new KUTreCombo().Create(), false, false, 1);
         }
 
-        private static void Cb_Changed(object sender, EventArgs e)
-        {
-            ComboBox cb = (ComboBox)sender;
-            int index = cb.Active;            
-        }
-
-        static Widget CreateComboBox(List<KUUrlItem> listUrlItem)
-        {
-            var cb = new ComboBox();
-            //cb. += OnClicked_Update;
-            return cb;
-        }
-
         static Widget CreateCheckButton_OnlyStableVersion()
         {
-            var cb = new CheckButton(KUGuiLabel.OnlyStableVersion);
+            var cb = new CheckButton(KUGuiLabel.OnlyStableVersion)
+            {
+                Active = Program.Configurator.IsOnlyStableVersion
+            };
             cb.Toggled += OnToggled_OnlyStableVersion;
 
             return cb;
@@ -93,6 +80,32 @@ namespace SharpKernelUpdate.App.Gui.GTK
             Program.LOG.Debug("Configurator.isOnlyStableVersion: " + Program.Configurator.IsOnlyStableVersion);
         }
 
+        static Widget CreateCheckButton_LowLatency()
+        {
+            var cb = new CheckButton(KUGuiLabel.LowLatency)
+            {
+                Active = Program.Configurator.IsLowLatency
+            };
+            cb.Toggled += OnToggled_LowLatency;
+
+            return cb;
+        }
+
+        static void OnToggled_LowLatency(object sender, EventArgs args)
+        {
+            var cb = (CheckButton)sender;
+            if (cb.Active)
+            {
+                Program.Configurator.IsLowLatency = true;
+            }
+            else
+            {
+                Program.Configurator.IsLowLatency = false;
+            }
+
+            Program.LOG.Debug("Configurator.IsLowLatency: " + Program.Configurator.IsLowLatency);
+        }
+
         static void CreateRadioButtons_Architecture(Box container)
         {
             var rb64 = new RadioButton(KUGuiLabel.Architecture_x64);
@@ -110,7 +123,7 @@ namespace SharpKernelUpdate.App.Gui.GTK
             var rb = (RadioButton)sender;
             if (rb.Active)
             {
-				Program.Configurator.Is64Architecture=true;
+                Program.Configurator.Is64Architecture = true;
             }
             else
             {

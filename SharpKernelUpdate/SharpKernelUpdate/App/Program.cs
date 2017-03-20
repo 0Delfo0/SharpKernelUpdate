@@ -6,22 +6,22 @@ using SharpKernelUpdate.App.Gui;
 
 namespace SharpKernelUpdate
 {
-	static class Program
-	{
-		public static readonly ILog LOG = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-		public static readonly KUConfigurator Configurator = new KUConfigurator();
+    static class Program
+    {
+        public static readonly ILog LOG = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public static readonly KUConfigurator Configurator = new KUConfigurator();
 
-		    [STAThread]
-		static void Main()
-		{
-			LOG.Info("START");
+        [STAThread]
+        static void Main()
+        {
+            LOG.Info("START");
 
-			Application.Init();
+            Application.Init();
 
-			var sharpKernelUpdateWindow = new KUSharpKernelUpdateWindow();
-			sharpKernelUpdateWindow.Show();
+            var sharpKernelUpdateWindow = new KUSharpKernelUpdateWindow();
+            sharpKernelUpdateWindow.Show();
 
-			Application.Run();
-		}
-	}
+            Application.Run();
+        }
+    }
 }

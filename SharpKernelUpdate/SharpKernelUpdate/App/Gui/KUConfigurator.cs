@@ -2,65 +2,65 @@
 
 namespace SharpKernelUpdate.App.Gui
 {
-	public class KUConfigurator
-	{
-		public const string BaseUrl = "http://kernel.ubuntu.com/~kernel-ppa/mainline/";
+    public class KUConfigurator
+    {
+        public const string BaseUrl = "http://kernel.ubuntu.com/~kernel-ppa/mainline/";
 
-		bool isOnlyStableVersion;
-		bool is64Architecture;
-		bool isLowLatency;
-		KUUrlItem currentUrlItem;
+        bool isOnlyStableVersion = true;
+        bool is64Architecture = true;
+        bool isLowLatency = false;
+        KUUrlItem currentUrlItem;
 
-		public bool IsOnlyStableVersion
-		{
-			get
-			{
-				return isOnlyStableVersion;
-			}
+        public bool IsOnlyStableVersion
+        {
+            get
+            {
+                return isOnlyStableVersion;
+            }
 
-			set
-			{
-				isOnlyStableVersion = value;
-			}
-		}
+            set
+            {
+                isOnlyStableVersion = value;
+            }
+        }
 
-		public bool Is64Architecture
-		{
-			get
-			{
-				return is64Architecture;
-			}
+        public bool Is64Architecture
+        {
+            get
+            {
+                return is64Architecture;
+            }
 
-			set
-			{
-				is64Architecture = value;
-			}
-		}
+            set
+            {
+                is64Architecture = value;
+            }
+        }
 
-		public bool IsLowLatency
-		{
-			get
-			{
-				return isLowLatency;
-			}
+        public bool IsLowLatency
+        {
+            get
+            {
+                return isLowLatency;
+            }
 
-			set
-			{
-				isLowLatency = value;
-			}
-		}
+            set
+            {
+                isLowLatency = value;
+            }
+        }
 
-		public KUUrlItem CurrentUrlItem
-		{
-			get
-			{
-				return currentUrlItem;
-			}
+        public KUUrlItem CurrentUrlItem
+        {
+            get
+            {
+                return currentUrlItem;
+            }
 
-			set
-			{
-				currentUrlItem = value;
-			}
-		}
-	}
+            set
+            {
+                currentUrlItem = value;
+            }
+        }
+    }
 }

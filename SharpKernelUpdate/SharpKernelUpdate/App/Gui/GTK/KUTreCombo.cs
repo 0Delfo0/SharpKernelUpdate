@@ -4,8 +4,6 @@ using SharpKernelUpdate.App.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
@@ -36,12 +34,6 @@ namespace SharpKernelUpdate.App.Gui.GTK
             var groupingList = KUFilter.GetListElements(_COMBO_INDEX, urlItemList);
             _groupingList = groupingList;
 
-            //var children = _hBox_Combo.Children;
-            //foreach (var child in _hBox_Combo.Children)
-            //{
-            //    child.Destroy();
-            //}
-
             List<string> values = new List<string>();
 
             foreach (var i in groupingList)
@@ -59,16 +51,11 @@ namespace SharpKernelUpdate.App.Gui.GTK
         {
             ComboBox cb = (ComboBox)sender;
             int index = cb.Active;
-            
-            var element = _groupingList.ElementAt(index);         
+
+            var element = _groupingList.ElementAt(index);
 
             _COMBO_INDEX++;
             Create(element.ToList());
         }
-
-        
-
     }
-
-
 }

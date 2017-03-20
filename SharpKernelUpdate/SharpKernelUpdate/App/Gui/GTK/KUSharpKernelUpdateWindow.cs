@@ -1,5 +1,4 @@
-﻿using System;
-using Gtk;
+﻿using Gtk;
 
 namespace SharpKernelUpdate.App.Gui.GTK
 {
@@ -16,7 +15,6 @@ namespace SharpKernelUpdate.App.Gui.GTK
             Build();
         }
 
-
         protected virtual void Build()
         {
             this.WindowPosition = ((global::Gtk.WindowPosition)(4));
@@ -29,11 +27,10 @@ namespace SharpKernelUpdate.App.Gui.GTK
             this.Show();
         }
 
-
-        protected void OnDeleteEvent(object sender, DeleteEventArgs a)
+        protected void OnDeleteEvent(object sender, DeleteEventArgs e)
         {
             Application.Quit();
-            a.RetVal = true;
+            e.RetVal = true;
         }
     }
 }

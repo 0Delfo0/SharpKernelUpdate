@@ -1,10 +1,7 @@
-﻿using SharpKernelUpdate.App.Gui;
-using SharpKernelUpdate.App.Model;
+﻿using SharpKernelUpdate.App.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Parsers
 {
@@ -12,7 +9,7 @@ namespace SharpKernelUpdate.App.Parsers
     {
         public static bool StableVersion(string value)
         {
-			if (Program.Configurator.IsOnlyStableVersion)
+            if (Program.Configurator.IsOnlyStableVersion)
             {
                 if (value.IndexOf("rc", StringComparison.OrdinalIgnoreCase) >= 0)
                 {

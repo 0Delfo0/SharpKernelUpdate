@@ -1,13 +1,11 @@
 ﻿using AngleSharp.Dom;
-using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
-using SharpKernelUpdate.App.Gui;
 using SharpKernelUpdate.App.Model;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Configuration;
 
 namespace SharpKernelUpdate.App.Parsers
 {
@@ -44,7 +42,8 @@ namespace SharpKernelUpdate.App.Parsers
             try
             {
                 var htmlParser = new HtmlParser();
-                var iHtmlDocument = htmlParser.Parse(GetCall(KUConfigurator.BaseUrl));
+                
+                var iHtmlDocument = htmlParser.Parse(GetCall(ConfigurationManager.AppSettings["BaseUrl"]));
                 var links = iHtmlDocument.Links;
 
                 foreach (IElement link in links)
