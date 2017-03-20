@@ -15,11 +15,12 @@ namespace SharpKernelUpdate.App.Parsers.Downloaders
         ManualResetEvent reset;
         string htmlString;
 
-        public File(KUUrlItem urlItem) : base(urlItem)
-        {
-        }
+		public File(Gtk.ProgressBar progressBar, KUUrlItem urlItem) : base(progressBar, urlItem)
+		{
+			
+		}
 
-        public bool DownloadFile(KUUrlItem urlItem)
+       public bool DownloadFile(KUUrlItem urlItem)
         {
             return DownloadFile(urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
