@@ -1,22 +1,22 @@
-﻿using Gtk;
-using SharpKernelUpdate.App.Model;
+﻿using SharpKernelUpdate.App.Model;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace SharpKernelUpdate.App.Parsers
+namespace SharpKernelUpdate.App.Parsers.Downloaders
 {
-    class KUDownloader
+    class File : KUDownloaders
     {
-        private ProgressBar progressBar;
-        private KUUrlItem urlItem;
-        private ManualResetEvent reset;
+        ManualResetEvent reset;
+        string htmlString;
 
-        public KUDownloader(KUUrlItem urlItem)
+        public File(KUUrlItem urlItem) : base(urlItem)
         {
-            this.urlItem = urlItem;
-            this.progressBar = new ProgressBar();
         }
 
         public bool DownloadFile(KUUrlItem urlItem)
@@ -26,7 +26,6 @@ namespace SharpKernelUpdate.App.Parsers
 
         public bool DownloadFile(string uri, string filePath, string fileName)
         {
-            bool downloadComplete = false;
             reset = new ManualResetEvent(false);
 
             var client = new WebClient();
@@ -37,19 +36,11 @@ namespace SharpKernelUpdate.App.Parsers
 
             reset.WaitOne();
 
-            downloadComplete = true;
-
-            return downloadComplete;
-        }
-
-        void DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs args)
-        {
-            progressBar.Fraction = (args.ProgressPercentage / 100);
+            return true;
         }
 
         private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs args)
         {
-            urlItem.IsReady = true;
             reset.Set();
         }
     }

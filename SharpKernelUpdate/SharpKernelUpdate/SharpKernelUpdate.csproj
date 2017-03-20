@@ -84,7 +84,9 @@
   <ItemGroup>
     <Compile Include="App\Gui\Gtk\KUTreCombo.cs" />
     <Compile Include="App\Model\KUUrlItem.cs" />
-    <Compile Include="App\Parsers\KUDownloader.cs" />
+    <Compile Include="App\Parsers\Downloaders\File.cs" />
+    <Compile Include="App\Parsers\Downloaders\HtlmString.cs" />
+    <Compile Include="App\Parsers\Downloaders\KUDownloaders.cs" />
     <Compile Include="App\Parsers\KUFiles.cs" />
     <Compile Include="App\Parsers\KUFilter.cs" />
     <Compile Include="App\Parsers\KUParser.cs" />
@@ -109,6 +111,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
