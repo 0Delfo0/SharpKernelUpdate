@@ -1,7 +1,7 @@
 ﻿using Gtk;
 using System;
 
-namespace SharpKernelUpdate.App.Gui.GTK
+namespace SharpKernelUpdate.App.Gui.Gtk
 {
     public class KUComponents
     {

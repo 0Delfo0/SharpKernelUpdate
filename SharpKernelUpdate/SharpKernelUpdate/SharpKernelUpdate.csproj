@@ -82,7 +82,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\Gui\GTK\KUTreCombo.cs" />
+    <Compile Include="App\Gui\Gtk\KUTreCombo.cs" />
     <Compile Include="App\Model\KUUrlItem.cs" />
     <Compile Include="App\Parsers\KUDownloader.cs" />
     <Compile Include="App\Parsers\KUFiles.cs" />
@@ -92,8 +92,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
     <Compile Include="App\Gui\KUConfigurator.cs" />
-    <Compile Include="App\Gui\GTK\KUSharpKernelUpdateWindow.cs" />
-    <Compile Include="App\Gui\GTK\KUComponents.cs" />
+    <Compile Include="App\Gui\Gtk\KUSharpKernelUpdateWindow.cs" />
+    <Compile Include="App\Gui\Gtk\KUComponents.cs" />
     <Compile Include="App\Gui\KUGuiLabel.cs" />
     <None Include="packages.config" />
   </ItemGroup>

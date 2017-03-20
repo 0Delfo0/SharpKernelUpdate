@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SharpKernelUpdate.App.Gui.GTK
+namespace SharpKernelUpdate.App.Gui.Gtk
 {
     class KUTreCombo
     {

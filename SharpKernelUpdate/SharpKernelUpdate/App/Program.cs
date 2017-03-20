@@ -1,7 +1,7 @@
 ﻿using log4net;
 using System;
 using Gtk;
-using SharpKernelUpdate.App.Gui.GTK;
+using SharpKernelUpdate.App.Gui.Gtk;
 using SharpKernelUpdate.App.Gui;
 
 namespace SharpKernelUpdate

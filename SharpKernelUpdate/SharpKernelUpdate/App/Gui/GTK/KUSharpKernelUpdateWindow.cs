@@ -1,6 +1,6 @@
 ﻿using Gtk;
 
-namespace SharpKernelUpdate.App.Gui.GTK
+namespace SharpKernelUpdate.App.Gui.Gtk
 {
     public partial class KUSharpKernelUpdateWindow : Window
     {
