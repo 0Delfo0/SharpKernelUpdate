@@ -1,90 +1,104 @@
-﻿namespace SharpKernelUpdate.App.Model
+﻿using System.Collections.Generic;
+
+namespace SharpKernelUpdate.App.Model
 {
-	public class KUUrlItem
-	{
-		string fullName;
-		string[] splitName;
-		string uri;
-		string filePath;
-		string fileName;
-		bool isReady;
+    public class KUUrlItem
+    {
+        string fullName;
+        List<string> splitName;
+        string uri;
+        string filePath;
+        string fileName;
+        bool isReady;
 
-		public string FullName
-		{
-			get
-			{
-				return fullName;
-			}
+        public override string ToString()
+        {
+            return "KUUrlItem{" +
+                "fullName='" + FullName + '\'' +
+                ", splitName='" + string.Join(".", SplitName) + '\'' +
+                ", uri='" + Uri + '\'' +
+                ", filePath='" + FilePath + '\'' +
+                ", fileName='" + FileName + '\'' +
+                ", isReady=" + IsReady +
+                '}';
+        }
 
-			set
-			{
-				fullName = value;
-			}
-		}
+        public string FullName
+        {
+            get
+            {
+                return fullName;
+            }
 
-		public string[] SplitName
-		{
-			get
-			{
-				return splitName;
-			}
+            set
+            {
+                fullName = value;
+            }
+        }
 
-			set
-			{
-				splitName = value;
-			}
-		}
+        public List<string> SplitName
+        {
+            get
+            {
+                return splitName;
+            }
 
-		public string Uri
-		{
-			get
-			{
-				return uri;
-			}
+            set
+            {
+                splitName = value;
+            }
+        }
 
-			set
-			{
-				uri = value;
-			}
-		}
+        public string Uri
+        {
+            get
+            {
+                return uri;
+            }
 
-		public string FilePath
-		{
-			get
-			{
-				return filePath;
-			}
+            set
+            {
+                uri = value;
+            }
+        }
 
-			set
-			{
-				filePath = value;
-			}
-		}
+        public string FilePath
+        {
+            get
+            {
+                return filePath;
+            }
 
-		public string FileName
-		{
-			get
-			{
-				return fileName;
-			}
+            set
+            {
+                filePath = value;
+            }
+        }
 
-			set
-			{
-				fileName = value;
-			}
-		}
+        public string FileName
+        {
+            get
+            {
+                return fileName;
+            }
 
-		public bool IsReady
-		{
-			get
-			{
-				return isReady;
-			}
+            set
+            {
+                fileName = value;
+            }
+        }
 
-			set
-			{
-				isReady = value;
-			}
-		}
-	}
+        public bool IsReady
+        {
+            get
+            {
+                return isReady;
+            }
+
+            set
+            {
+                isReady = value;
+            }
+        }
+    }
 }

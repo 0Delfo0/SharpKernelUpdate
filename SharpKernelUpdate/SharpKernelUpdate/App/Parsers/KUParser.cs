@@ -11,6 +11,8 @@ namespace SharpKernelUpdate.App.Parsers
 {
     static class KUParser
     {
+        private static char[] DELIMITER = new char[] { '.' };
+
         static List<KUUrlItem> MAIN_LIST;
 
         public static List<KUUrlItem> GetMainList()
@@ -19,6 +21,12 @@ namespace SharpKernelUpdate.App.Parsers
             {
                 GetUrlItems();
             }
+
+            foreach (KUUrlItem i in MAIN_LIST)
+            {
+                Program.LOG.Debug(i.ToString());
+            }
+
             return MAIN_LIST;
         }
 
@@ -38,25 +46,25 @@ namespace SharpKernelUpdate.App.Parsers
         static void GetUrlItems()
         {
             MAIN_LIST = new List<KUUrlItem>();
-
             try
             {
                 var htmlParser = new HtmlParser();
-                
+
                 var iHtmlDocument = htmlParser.Parse(GetCall(ConfigurationManager.AppSettings["BaseUrl"]));
                 var links = iHtmlDocument.Links;
 
                 foreach (IElement link in links)
                 {
                     string fullName = link.TextContent;
-                    var tmp = fullName.Split('.');
+
+                    var tmp = new List<string>(fullName.Split(DELIMITER, 3));
+
+                    tmp = KUFilter.Normalize(tmp);
 
                     var isStableVersion = KUFilter.StableVersion(tmp);
 
-                    if (tmp[0].StartsWith("v", StringComparison.CurrentCultureIgnoreCase) && isStableVersion)
+                    if (tmp.Count > 0 && isStableVersion)
                     {
-                        tmp[0] = KUFilter.FormatFirst(tmp[0]);
-
                         var urlItem = new KUUrlItem()
                         {
                             FullName = fullName,

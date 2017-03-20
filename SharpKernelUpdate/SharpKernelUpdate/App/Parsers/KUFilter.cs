@@ -7,18 +7,98 @@ namespace SharpKernelUpdate.App.Parsers
 {
     class KUFilter
     {
-        public static bool StableVersion(string value)
+
+        private static string StableVersion_Filter_RC = "RC";
+        private static string StableVersion_Filter_UNSTABLE = "UNSTABLE";
+
+        private static List<string> CHAR_TO_REMOVE = new List<string> { "/" };
+
+
+        public static List<string> Normalize(List<string> values)
+        {
+            List<string> retList = new List<string>();
+
+            try
+            {
+                if (values != null)
+                {
+                    int tmpLength = values.Count;
+
+                    if (tmpLength > 1)
+                    {
+                        if (values[0].StartsWith("v", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            values[0] = FormatFirst(values[0]);
+
+                            switch (tmpLength)
+                            {
+                                case 1:
+                                    break;
+
+                                case 2:
+                                    retList.Add(values[0]);
+                                    string[] prefix = values[1].Split('-');
+
+                                    int prefixLength = prefix.Length;
+
+                                    switch (prefixLength)
+                                    {
+                                        case 1:
+                                            retList.Add(prefix[0]);
+                                            retList.Add("0");
+                                            break;
+
+                                        default:
+                                            retList.Add(prefix[0]);
+                                            retList.Add("0-" + prefix[1]);
+                                            break;
+                                    }
+                                    break;
+
+                                case 3:
+                                case 4:
+                                    retList = values;
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Program.LOG.Error("Normalize", e);
+            }
+
+            if (retList.Count > 0)
+            {
+                for (int i = 0; i < retList.Count; i++)
+                {
+                    foreach (var s in CHAR_TO_REMOVE)
+                    {
+                        retList[i] = retList[i].Replace(s, String.Empty);
+                    }
+                }
+            }
+
+            return retList;
+        }
+
+        public static bool StableVersion(List<string> values)
         {
             if (Program.Configurator.IsOnlyStableVersion)
             {
-                if (value.IndexOf("rc", StringComparison.OrdinalIgnoreCase) >= 0)
+                foreach (var s in values)
                 {
-                    return false;
+
+                    if (s.IndexOf(StableVersion_Filter_RC, StringComparison.OrdinalIgnoreCase) >= 0 || s.IndexOf(StableVersion_Filter_UNSTABLE, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        return false;
+                    }
                 }
-                else
-                {
-                    return true;
-                }
+                return true;
             }
             else
             {
@@ -26,20 +106,7 @@ namespace SharpKernelUpdate.App.Parsers
             }
         }
 
-        public static bool StableVersion(string[] values)
-        {
-            foreach (string s in values)
-            {
-                var isStableVersion = StableVersion(s);
-                if (!isStableVersion)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public static string FormatFirst(string value)
+        private static string FormatFirst(string value)
         {
             return value.Trim('v');
         }
