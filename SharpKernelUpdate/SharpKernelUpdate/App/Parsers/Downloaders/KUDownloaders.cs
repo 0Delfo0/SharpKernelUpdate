@@ -7,26 +7,40 @@ using System.Threading;
 
 namespace SharpKernelUpdate.App.Parsers.Downloaders
 {
-	class KUDownloaders
-	{
-		protected ProgressBar progressBar;
-		protected KUUrlItem urlItem;
+    class KUDownloaders : IDowloaders
+    {
+        protected ProgressBar progressBar;
+        protected KUUrlItem urlItem;
 
-		public KUDownloaders(ProgressBar progressBar, KUUrlItem urlItem)
-		{
-			this.progressBar = progressBar;
-			this.urlItem = urlItem;
-		}
+        public KUDownloaders(ProgressBar progressBar, KUUrlItem urlItem)
+        {
+            this.progressBar = progressBar;
+            this.urlItem = urlItem;
+        }
 
-		public string DownloadHtmlString(string uri)
-		{
-			var htmlString = new HtmlString(progressBar, urlItem);
-			return htmlString.DownloadHtmlString1(uri);
-		}
+        public bool DownloadFile(KUUrlItem urlItem)
+        {
+            var downloader = new File(progressBar, urlItem);
+            return downloader.Download(urlItem);
+        }
 
-		protected void DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs args)
-		{
-			progressBar.Fraction = (args.ProgressPercentage / 100);
-		}
-	}
+        public bool DownloadFile(string uri, string filePath, string fileName)
+        {
+            var downloader = new File(progressBar, urlItem);
+            return downloader.Download(uri, filePath, fileName);
+        }
+
+        public string DownloadHtmlString(string uri)
+        {
+            var downloader = new HtmlString(progressBar, urlItem);
+            return downloader.Download(uri);
+        }
+
+        //
+        protected void DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs args)
+        {
+            progressBar.Fraction = (args.ProgressPercentage / 100);
+        }
+
+    }
 }

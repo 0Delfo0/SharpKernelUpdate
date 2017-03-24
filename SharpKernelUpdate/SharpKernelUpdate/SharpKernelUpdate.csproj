@@ -86,6 +86,7 @@
     <Compile Include="App\Model\KUUrlItem.cs" />
     <Compile Include="App\Parsers\Downloaders\File.cs" />
     <Compile Include="App\Parsers\Downloaders\HtlmString.cs" />
+    <Compile Include="App\Parsers\Downloaders\IDowloaders.cs" />
     <Compile Include="App\Parsers\Downloaders\KUDownloaders.cs" />
     <Compile Include="App\Parsers\KUFiles.cs" />
     <Compile Include="App\Parsers\KUFilter.cs" />
