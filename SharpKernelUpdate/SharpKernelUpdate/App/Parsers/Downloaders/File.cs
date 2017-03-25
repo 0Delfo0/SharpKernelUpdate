@@ -1,12 +1,8 @@
 ﻿using SharpKernelUpdate.App.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SharpKernelUpdate.App.Parsers.Downloaders
 {
@@ -15,17 +11,16 @@ namespace SharpKernelUpdate.App.Parsers.Downloaders
         ManualResetEvent reset;
         string htmlString;
 
-		public File(Gtk.ProgressBar progressBar, KUUrlItem urlItem) : base(progressBar, urlItem)
-		{
-			
-		}
-
-       public bool DownloadFile(KUUrlItem urlItem)
+        public File(Gtk.ProgressBar progressBar, KUUrlItem urlItem) : base(progressBar, urlItem)
         {
-            return DownloadFile(urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
 
-        public bool DownloadFile(string uri, string filePath, string fileName)
+        public bool Download(KUUrlItem urlItem)
+        {
+            return Download(urlItem.Uri, urlItem.FilePath, urlItem.FileName);
+        }
+
+        public bool Download(string uri, string filePath, string fileName)
         {
             reset = new ManualResetEvent(false);
 

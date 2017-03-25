@@ -11,11 +11,19 @@ namespace SharpKernelUpdate.App.Gui.Gtk
     {
         HBox _hBox_Combo = new HBox(false, 5);
 
-        List<KUUrlItem> _mainList = KUParser.GetMainList();
+        ProgressBar progressBar;
+
+        List<KUUrlItem> _mainList;
         IEnumerable<IGrouping<string, KUUrlItem>> _groupingList;
         List<KUUrlItem> _currentList = new List<KUUrlItem>();
-
+        
         int _COMBO_INDEX = 0;
+
+        public KUTreCombo(ProgressBar progressBar)
+        {
+            this.progressBar = progressBar;
+            _mainList = KUParser.GetMainList(progressBar);
+        }
 
         public Widget Create()
         {

@@ -8,7 +8,8 @@ namespace SharpKernelUpdate.App.Gui.Gtk
 		private static VBox mainVBox = new VBox(false, 5);
 		private static HBox mainHBox1 = new HBox(false, 5);
 		private static HBox mainHBox2_ProgressBar = new HBox(false, 5);
-		private static HBox mainHBox3 = new HBox(false, 5);
+        private static ProgressBar progressBar = new ProgressBar();
+        private static HBox mainHBox3 = new HBox(false, 5);
 
 		public static Widget AddComponent()
 		{
@@ -32,7 +33,7 @@ namespace SharpKernelUpdate.App.Gui.Gtk
 
 			mainVBox.PackStart(new HSeparator());
 
-			mainHBox2_ProgressBar.PackStart(new ProgressBar(), true, true, 1);
+			mainHBox2_ProgressBar.PackStart(progressBar, true, true, 1);
 			mainVBox.PackStart(mainHBox2_ProgressBar, false, false, 1);
 
 			mainVBox.PackStart(new HSeparator());
@@ -51,7 +52,7 @@ namespace SharpKernelUpdate.App.Gui.Gtk
 
 		static void OnClicked_Update(object sender, EventArgs args)
 		{
-			mainVBox.PackStart(new KUTreCombo().Create(), false, false, 1);
+			mainVBox.PackStart(new KUTreCombo(progressBar).Create(), false, false, 1);
 		}
 
 		static Widget CreateCheckButton_OnlyStableVersion()
