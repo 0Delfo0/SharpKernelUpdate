@@ -7,16 +7,14 @@ namespace SharpKernelUpdate.App.Parsers
 {
     class KUFilter
     {
-
         private static string StableVersion_Filter_RC = "RC";
         private static string StableVersion_Filter_UNSTABLE = "UNSTABLE";
 
         private static List<string> CHAR_TO_REMOVE = new List<string> { "/" };
 
-
         public static List<string> Normalize(List<string> values)
         {
-            List<string> retList = new List<string>();
+            var retList = new List<string>();
 
             try
             {
@@ -37,7 +35,7 @@ namespace SharpKernelUpdate.App.Parsers
 
                                 case 2:
                                     retList.Add(values[0]);
-                                    string[] prefix = values[1].Split('-');
+                                    var prefix = values[1].Split('-');
 
                                     int prefixLength = prefix.Length;
 
@@ -92,7 +90,6 @@ namespace SharpKernelUpdate.App.Parsers
             {
                 foreach (var s in values)
                 {
-
                     if (s.IndexOf(StableVersion_Filter_RC, StringComparison.OrdinalIgnoreCase) >= 0 || s.IndexOf(StableVersion_Filter_UNSTABLE, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         return false;
