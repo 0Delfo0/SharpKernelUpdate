@@ -54,7 +54,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SharpKernelUpdate.Program</StartupObject>
+    <StartupObject>SharpKernelUpdate.App.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -82,22 +82,22 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\Gui\Gtk\KUTreCombo.cs" />
-    <Compile Include="App\Model\KUUrlItem.cs" />
+    <Compile Include="App\Gui\Gtk\KuTreCombo.cs" />
+    <Compile Include="App\Model\KuUrlItem.cs" />
     <Compile Include="App\Parsers\Downloaders\File.cs" />
-    <Compile Include="App\Parsers\Downloaders\HtlmString.cs" />
+    <Compile Include="App\Parsers\Downloaders\HtmlString.cs" />
     <Compile Include="App\Parsers\Downloaders\IDowloaders.cs" />
-    <Compile Include="App\Parsers\Downloaders\KUDownloaders.cs" />
-    <Compile Include="App\Parsers\KUFiles.cs" />
-    <Compile Include="App\Parsers\KUFilter.cs" />
-    <Compile Include="App\Parsers\KUParser.cs" />
+    <Compile Include="App\Parsers\Downloaders\KuDownloaders.cs" />
+    <Compile Include="App\Parsers\KuFiles.cs" />
+    <Compile Include="App\Parsers\KuFilter.cs" />
+    <Compile Include="App\Parsers\KuParser.cs" />
     <Compile Include="App\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
-    <Compile Include="App\Gui\KUConfigurator.cs" />
-    <Compile Include="App\Gui\Gtk\KUSharpKernelUpdateWindow.cs" />
-    <Compile Include="App\Gui\Gtk\KUComponents.cs" />
-    <Compile Include="App\Gui\KUGuiLabel.cs" />
+    <Compile Include="App\Gui\KuConfigurator.cs" />
+    <Compile Include="App\Gui\Gtk\KuSharpKernelUpdateWindow.cs" />
+    <Compile Include="App\Gui\Gtk\KuComponents.cs" />
+    <Compile Include="App\Gui\KuGuiLabel.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

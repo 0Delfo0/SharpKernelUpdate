@@ -6,7 +6,7 @@ using System.Net;
 
 namespace SharpKernelUpdate.App.Parsers
 {
-    static class KUFiles
+    internal static class KuFiles
     {
         public static bool SaveFile(string filePath, string fileName)
         {
@@ -18,14 +18,14 @@ namespace SharpKernelUpdate.App.Parsers
             return retVal;
         }
 
-        public static bool DownloadFile(ProgressBar progressBar, KUUrlItem urlItem)
+        public static bool DownloadFile(ProgressBar progressBar, KuUrlItem urlItem)
         {
             return DownloadFile(progressBar, urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
 
-        public static bool DownloadFile(ProgressBar progressBar, string uri, string filePath, string fileName)
+        private static bool DownloadFile(ProgressBar progressBar, string uri, string filePath, string fileName)
         {
-            bool retVal = true;
+            var retVal = true;
 
             var client = new WebClient();
 
@@ -35,10 +35,7 @@ namespace SharpKernelUpdate.App.Parsers
                 progressBar.Fraction = (args.ProgressPercentage / 100);
             };
 
-            client.DownloadFileCompleted += (s, args) =>
-            {
-                Console.WriteLine("END");
-            };
+            client.DownloadFileCompleted += (s, args) => { Console.WriteLine("END"); };
 
             client.DownloadFileAsync(new Uri(uri), AddPathSeparator(filePath) + fileName);
 
@@ -57,15 +54,12 @@ namespace SharpKernelUpdate.App.Parsers
 
         public static bool DeleteFile(string filePath, string fileName)
         {
-            bool retVal = false;
-            string fullPath = null;
+            var retVal = false;
 
-            if (filePath != null && fileName != null)
-            {
-                fullPath = AddPathSeparator(filePath) + fileName;
-                File.Delete(fullPath);
-                retVal = true;
-            }
+            if (filePath == null || fileName == null) return retVal;
+            var fullPath = AddPathSeparator(filePath) + fileName;
+            File.Delete(fullPath);
+            retVal = true;
 
             return retVal;
         }
@@ -74,18 +68,14 @@ namespace SharpKernelUpdate.App.Parsers
         {
             string fullPath = null;
 
-            if (filePath != null)
+            if (filePath == null) return null;
+
+            fullPath += filePath;
+            if (!filePath.EndsWith(Path.PathSeparator.ToString()))
             {
-                fullPath += filePath;
-                if (!filePath.EndsWith(Path.PathSeparator.ToString()))
-                {
-                    fullPath += Path.PathSeparator.ToString();
-                }
+                fullPath += Path.PathSeparator.ToString();
             }
             return fullPath;
         }
-
     }
-
-
 }

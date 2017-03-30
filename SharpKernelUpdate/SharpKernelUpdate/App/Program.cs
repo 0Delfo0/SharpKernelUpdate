@@ -1,24 +1,26 @@
-﻿using log4net;
-using System;
+﻿using System;
 using Gtk;
-using SharpKernelUpdate.App.Gui.Gtk;
+using log4net;
 using SharpKernelUpdate.App.Gui;
+using SharpKernelUpdate.App.Gui.Gtk;
 
-namespace SharpKernelUpdate
+namespace SharpKernelUpdate.App
 {
-    static class Program
+    internal static class Program
     {
-        public static readonly ILog LOG = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public static readonly KUConfigurator Configurator = new KUConfigurator();
+        public static readonly ILog Log =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public static readonly KuConfigurator Configurator = new KuConfigurator();
 
         [STAThread]
         static void Main()
         {
-            LOG.Info("START");
+            Log.Info("START");
 
             Application.Init();
 
-            var sharpKernelUpdateWindow = new KUSharpKernelUpdateWindow();
+            var sharpKernelUpdateWindow = new KuSharpKernelUpdateWindow();
             sharpKernelUpdateWindow.Show();
 
             Application.Run();

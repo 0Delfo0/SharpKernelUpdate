@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace SharpKernelUpdate.App.Parsers
 {
-    class KUFilter
+    class KuFilter
     {
         private static string StableVersion_Filter_RC = "RC";
         private static string StableVersion_Filter_UNSTABLE = "UNSTABLE";
 
-        private static List<string> CHAR_TO_REMOVE = new List<string> { "/" };
+        private static List<string> CHAR_TO_REMOVE = new List<string> {"/"};
 
         public static List<string> Normalize(List<string> values)
         {
@@ -36,9 +36,7 @@ namespace SharpKernelUpdate.App.Parsers
                                 case 2:
                                     retList.Add(values[0]);
                                     var prefix = values[1].Split('-');
-
                                     int prefixLength = prefix.Length;
-
                                     switch (prefixLength)
                                     {
                                         case 1:
@@ -67,7 +65,7 @@ namespace SharpKernelUpdate.App.Parsers
             }
             catch (Exception e)
             {
-                Program.LOG.Error("Normalize", e);
+                Program.Log.Error("Normalize", e);
             }
 
             if (retList.Count > 0)
@@ -90,7 +88,8 @@ namespace SharpKernelUpdate.App.Parsers
             {
                 foreach (var s in values)
                 {
-                    if (s.IndexOf(StableVersion_Filter_RC, StringComparison.OrdinalIgnoreCase) >= 0 || s.IndexOf(StableVersion_Filter_UNSTABLE, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (s.IndexOf(StableVersion_Filter_RC, StringComparison.OrdinalIgnoreCase) >= 0 || s.IndexOf(
+                            StableVersion_Filter_UNSTABLE, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         return false;
                     }
@@ -108,7 +107,8 @@ namespace SharpKernelUpdate.App.Parsers
             return value.Trim('v');
         }
 
-        public static IEnumerable<IGrouping<string, KUUrlItem>> GetListElements(int level, List<KUUrlItem> listUrlItem)
+        public static IEnumerable<IGrouping<string, KuUrlItem>> GetListElements(int level,
+            IEnumerable<KuUrlItem> listUrlItem)
         {
             var p = from i in listUrlItem group i by i.SplitName[level];
             return p;

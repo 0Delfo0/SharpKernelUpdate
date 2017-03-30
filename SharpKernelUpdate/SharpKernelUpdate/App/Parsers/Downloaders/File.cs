@@ -6,38 +6,37 @@ using System.Threading;
 
 namespace SharpKernelUpdate.App.Parsers.Downloaders
 {
-    class File : KUDownloaders
+    internal class File : KuDownloaders
     {
-        ManualResetEvent reset;
-        string htmlString;
+        private ManualResetEvent _reset;
 
-        public File(Gtk.ProgressBar progressBar, KUUrlItem urlItem) : base(progressBar, urlItem)
+        public File(Gtk.ProgressBar progressBar, KuUrlItem urlItem) : base(progressBar, urlItem)
         {
         }
 
-        public bool Download(KUUrlItem urlItem)
+        public bool Download(KuUrlItem urlItem)
         {
             return Download(urlItem.Uri, urlItem.FilePath, urlItem.FileName);
         }
 
         public bool Download(string uri, string filePath, string fileName)
         {
-            reset = new ManualResetEvent(false);
+            _reset = new ManualResetEvent(false);
 
             var client = new WebClient();
 
-            client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
-            client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleted);
-            client.DownloadFileAsync(new Uri(uri), KUFiles.AddPathSeparator(filePath) + fileName);
+            client.DownloadProgressChanged += DownloadProgressChanged;
+            client.DownloadFileCompleted += DownloadFileCompleted;
+            client.DownloadFileAsync(new Uri(uri), KuFiles.AddPathSeparator(filePath) + fileName);
 
-            reset.WaitOne();
+            _reset.WaitOne();
 
             return true;
         }
 
         private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs args)
         {
-            reset.Set();
+            _reset.Set();
         }
     }
 }
