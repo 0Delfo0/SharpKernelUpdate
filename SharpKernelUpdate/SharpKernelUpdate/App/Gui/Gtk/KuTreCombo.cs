@@ -1,9 +1,9 @@
-﻿using Gtk;
-using SharpKernelUpdate.App.Model;
-using SharpKernelUpdate.App.Parsers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gtk;
+using SharpKernelUpdate.App.Model;
+using SharpKernelUpdate.App.Parsers;
 
 namespace SharpKernelUpdate.App.Gui.Gtk
 {
