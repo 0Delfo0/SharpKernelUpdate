@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Gtk;
 using log4net;
 using SharpKernelUpdate.App.Gui;
@@ -8,13 +9,12 @@ namespace SharpKernelUpdate.App
 {
     internal static class Program
     {
-        public static readonly ILog Log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static readonly KuConfigurator Configurator = new KuConfigurator();
 
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Log.Info("START");
 

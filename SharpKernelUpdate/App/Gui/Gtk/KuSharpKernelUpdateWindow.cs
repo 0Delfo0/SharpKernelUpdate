@@ -17,7 +17,7 @@ namespace SharpKernelUpdate.App.Gui.Gtk
 
         private void Build()
         {
-            this.WindowPosition = ((global::Gtk.WindowPosition) (4));
+            this.WindowPosition = ((WindowPosition) (4));
             Child?.ShowAll();
             this.DefaultWidth = 400;
             this.DefaultHeight = 300;

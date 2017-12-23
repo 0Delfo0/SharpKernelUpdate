@@ -1,8 +1,9 @@
-﻿using SharpKernelUpdate.App.Model;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Net;
 using System.Threading;
+using Gtk;
+using SharpKernelUpdate.App.Model;
 
 namespace SharpKernelUpdate.App.Parsers.Downloaders
 {
@@ -10,7 +11,7 @@ namespace SharpKernelUpdate.App.Parsers.Downloaders
     {
         private ManualResetEvent _reset;
 
-        public File(Gtk.ProgressBar progressBar, KuUrlItem urlItem) : base(progressBar, urlItem)
+        public File(ProgressBar progressBar, KuUrlItem urlItem) : base(progressBar, urlItem)
         {
         }
 

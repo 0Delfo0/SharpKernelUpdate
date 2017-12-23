@@ -1,34 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using AngleSharp.Parser.Html;
 using Gtk;
+using SharpKernelUpdate.App.Gui;
 using SharpKernelUpdate.App.Model;
 using SharpKernelUpdate.App.Parsers.Downloaders;
 
 namespace SharpKernelUpdate.App.Parsers
 {
-    static class KuParser
+    internal static class KuParser
     {
         private static readonly char[] Delimiter = new char[] {'.'};
 
-        static List<KuUrlItem> _mainList;
+        private static List<KuUrlItem> _mainList;
 
         public static List<KuUrlItem> GetMainList(ProgressBar progressBar)
         {
-            if (_mainList == null)
+            if(_mainList == null)
             {
                 GetUrlItems(progressBar);
             }
 
-            foreach (var i in _mainList)
+            foreach(var i in _mainList)
             {
                 Program.Log.Debug(i.ToString());
             }
 
             return _mainList;
         }
-
 
         static string GetCall(ProgressBar progressBar, string uri)
         {
@@ -57,10 +56,10 @@ namespace SharpKernelUpdate.App.Parsers
             {
                 var htmlParser = new HtmlParser();
 
-                var iHtmlDocument = htmlParser.Parse(GetCall(progressBar, ConfigurationManager.AppSettings["BaseUrl"]));
+                var iHtmlDocument = htmlParser.Parse(GetCall(progressBar, KuConfigurator.BaseUrl));
                 var links = iHtmlDocument.Links;
 
-                foreach (var link in links)
+                foreach(var link in links)
                 {
                     var fullName = link.TextContent;
 
@@ -70,7 +69,8 @@ namespace SharpKernelUpdate.App.Parsers
 
                     var isStableVersion = KuFilter.StableVersion(tmp);
 
-                    if (tmp.Count <= 0 || !isStableVersion) continue;
+                    if(tmp.Count <= 0 || !isStableVersion)
+                        continue;
                     var urlItem = new KuUrlItem()
                     {
                         FullName = fullName,
@@ -80,7 +80,7 @@ namespace SharpKernelUpdate.App.Parsers
                     _mainList.Add(urlItem);
                 }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Program.Log.Error("Error", e);
             }

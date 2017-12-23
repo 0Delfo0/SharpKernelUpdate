@@ -15,28 +15,28 @@ namespace SharpKernelUpdate.App.Gui.Gtk
         {
             MainHBox1.PackStart(CreateCheckButton_OnlyStableVersion(), false, false, 1);
 
-            MainHBox1.PackStart(new VSeparator());
+            MainHBox1.PackStart(new VSeparator(), false, false, 1);
 
             MainHBox1.PackStart(CreateCheckButton_LowLatency(), false, false, 1);
 
-            MainHBox1.PackStart(new VSeparator());
+            MainHBox1.PackStart(new VSeparator(), false, false, 1);
 
             CreateRadioButtons_Architecture(MainHBox1);
 
-            MainHBox1.PackStart(new VSeparator());
+            MainHBox1.PackStart(new VSeparator(), false, false, 1);
 
             MainHBox1.PackStart(CreateButton_Update(), false, false, 1);
 
-            MainHBox1.PackStart(new VSeparator());
+            MainHBox1.PackStart(new VSeparator(), false, false, 1);
 
             MainVBox.PackStart(MainHBox1, false, false, 1);
 
-            MainVBox.PackStart(new HSeparator());
+            MainVBox.PackStart(new HSeparator(), false, false, 1);
 
             MainHBox2ProgressBar.PackStart(MainProgressBar, true, true, 1);
             MainVBox.PackStart(MainHBox2ProgressBar, false, false, 1);
 
-            MainVBox.PackStart(new HSeparator());
+            MainVBox.PackStart(new HSeparator(), false, false, 1);
 
             MainVBox.PackStart(MainHBox3, false, false, 1);
 

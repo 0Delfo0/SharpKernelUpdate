@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.0</TargetFramework>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="AngleSharp" Version="0.9.9"/>
+        <PackageReference Include="GtkSharp" Version="3.22.24.16"/>
+        <PackageReference Include="log4net" Version="2.0.8"/>
+    </ItemGroup>
+</Project>

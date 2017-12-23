@@ -1,16 +1,16 @@
-﻿using SharpKernelUpdate.App.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SharpKernelUpdate.App.Model;
 
 namespace SharpKernelUpdate.App.Parsers
 {
-    class KuFilter
+    internal class KuFilter
     {
-        private static string StableVersion_Filter_RC = "RC";
-        private static string StableVersion_Filter_UNSTABLE = "UNSTABLE";
+        private const string StableVersionFilterRc = "RC";
+        private const string StableVersionFilterUnstable = "UNSTABLE";
 
-        private static List<string> CHAR_TO_REMOVE = new List<string> {"/"};
+        private static readonly List<string> CharToRemove = new List<string> {"/"};
 
         public static List<string> Normalize(List<string> values)
         {
@@ -18,17 +18,17 @@ namespace SharpKernelUpdate.App.Parsers
 
             try
             {
-                if (values != null)
+                if(values != null)
                 {
-                    int tmpLength = values.Count;
+                    var tmpLength = values.Count;
 
-                    if (tmpLength > 1)
+                    if(tmpLength > 1)
                     {
-                        if (values[0].StartsWith("v", StringComparison.CurrentCultureIgnoreCase))
+                        if(values[0].StartsWith("v", StringComparison.CurrentCultureIgnoreCase))
                         {
                             values[0] = FormatFirst(values[0]);
 
-                            switch (tmpLength)
+                            switch(tmpLength)
                             {
                                 case 1:
                                     break;
@@ -36,8 +36,8 @@ namespace SharpKernelUpdate.App.Parsers
                                 case 2:
                                     retList.Add(values[0]);
                                     var prefix = values[1].Split('-');
-                                    int prefixLength = prefix.Length;
-                                    switch (prefixLength)
+                                    var prefixLength = prefix.Length;
+                                    switch(prefixLength)
                                     {
                                         case 1:
                                             retList.Add(prefix[0]);
@@ -63,19 +63,18 @@ namespace SharpKernelUpdate.App.Parsers
                     }
                 }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Program.Log.Error("Normalize", e);
             }
 
-            if (retList.Count > 0)
+            if(retList.Count <= 0)
+                return retList;
+            for(var i = 0; i < retList.Count; i++)
             {
-                for (int i = 0; i < retList.Count; i++)
+                foreach(var s in CharToRemove)
                 {
-                    foreach (var s in CHAR_TO_REMOVE)
-                    {
-                        retList[i] = retList[i].Replace(s, String.Empty);
-                    }
+                    retList[i] = retList[i].Replace(s, String.Empty);
                 }
             }
 
@@ -84,12 +83,12 @@ namespace SharpKernelUpdate.App.Parsers
 
         public static bool StableVersion(List<string> values)
         {
-            if (Program.Configurator.IsOnlyStableVersion)
+            if(Program.Configurator.IsOnlyStableVersion)
             {
-                foreach (var s in values)
+                foreach(var s in values)
                 {
-                    if (s.IndexOf(StableVersion_Filter_RC, StringComparison.OrdinalIgnoreCase) >= 0 || s.IndexOf(
-                            StableVersion_Filter_UNSTABLE, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if(s.IndexOf(StableVersionFilterRc, StringComparison.OrdinalIgnoreCase) >= 0 || s.IndexOf(
+                           StableVersionFilterUnstable, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         return false;
                     }

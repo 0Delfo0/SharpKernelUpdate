@@ -1,8 +1,8 @@
-﻿using Gtk;
-using SharpKernelUpdate.App.Model;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
+using Gtk;
+using SharpKernelUpdate.App.Model;
 
 namespace SharpKernelUpdate.App.Parsers
 {
@@ -42,7 +42,6 @@ namespace SharpKernelUpdate.App.Parsers
             return retVal;
         }
 
-
         public static bool DeleteDir(string filePath, bool recursive)
         {
             bool retVal = true;
@@ -56,7 +55,8 @@ namespace SharpKernelUpdate.App.Parsers
         {
             var retVal = false;
 
-            if (filePath == null || fileName == null) return retVal;
+            if(filePath == null || fileName == null)
+                return retVal;
             var fullPath = AddPathSeparator(filePath) + fileName;
             File.Delete(fullPath);
             retVal = true;
@@ -68,10 +68,11 @@ namespace SharpKernelUpdate.App.Parsers
         {
             string fullPath = null;
 
-            if (filePath == null) return null;
+            if(filePath == null)
+                return null;
 
             fullPath += filePath;
-            if (!filePath.EndsWith(Path.PathSeparator.ToString()))
+            if(!filePath.EndsWith(Path.PathSeparator.ToString()))
             {
                 fullPath += Path.PathSeparator.ToString();
             }

@@ -1,7 +1,8 @@
-﻿using SharpKernelUpdate.App.Model;
-using System;
+﻿using System;
 using System.Net;
 using System.Threading;
+using Gtk;
+using SharpKernelUpdate.App.Model;
 
 namespace SharpKernelUpdate.App.Parsers.Downloaders
 {
@@ -10,7 +11,7 @@ namespace SharpKernelUpdate.App.Parsers.Downloaders
         private ManualResetEvent _reset;
         private string _htmlString;
 
-        public HtmlString(Gtk.ProgressBar progressBar, KuUrlItem urlItem) : base(progressBar, urlItem)
+        public HtmlString(ProgressBar progressBar, KuUrlItem urlItem) : base(progressBar, urlItem)
         {
         }
 
@@ -21,7 +22,7 @@ namespace SharpKernelUpdate.App.Parsers.Downloaders
             var client = new WebClient();
 
             client.DownloadProgressChanged += DownloadProgressChanged;
-            client.DownloadDataCompleted += DownloadDataCompleted;
+            client.DownloadStringCompleted += DownloadStringCompleted;
             client.DownloadStringAsync(new Uri(uri));
 
             _reset.WaitOne();
@@ -29,9 +30,10 @@ namespace SharpKernelUpdate.App.Parsers.Downloaders
             return _htmlString;
         }
 
-        private void DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
+        private void DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            _htmlString = System.Text.Encoding.Default.GetString(e.Result);
+            Console.WriteLine("DownloadStringCompleted");
+            _htmlString = e.Result;
             _reset.Set();
         }
     }
