@@ -1,5 +1,6 @@
 ﻿using System;
 using Gtk;
+using Microsoft.Extensions.Logging;
 
 namespace SharpKernelUpdate.App.Gui.Gtk
 {
@@ -71,7 +72,7 @@ namespace SharpKernelUpdate.App.Gui.Gtk
             var cb = (CheckButton) sender;
             Program.Configurator.IsOnlyStableVersion = cb.Active;
 
-            Program.Log.Debug("Configurator.isOnlyStableVersion: " + Program.Configurator.IsOnlyStableVersion);
+            Program.Log.LogDebug("Configurator.isOnlyStableVersion: " + Program.Configurator.IsOnlyStableVersion);
         }
 
         private static Widget CreateCheckButton_LowLatency()
@@ -90,7 +91,7 @@ namespace SharpKernelUpdate.App.Gui.Gtk
             var cb = (CheckButton) sender;
             Program.Configurator.IsLowLatency = cb.Active;
 
-            Program.Log.Debug("Configurator.IsLowLatency: " + Program.Configurator.IsLowLatency);
+            Program.Log.LogDebug("Configurator.IsLowLatency: " + Program.Configurator.IsLowLatency);
         }
 
         private static void CreateRadioButtons_Architecture(Box container)
@@ -109,7 +110,7 @@ namespace SharpKernelUpdate.App.Gui.Gtk
         {
             var rb = (RadioButton) sender;
             Program.Configurator.Is64Architecture = rb.Active;
-            Program.Log.Debug("Configurator.is64Architecture: " + Program.Configurator.Is64Architecture);
+            Program.Log.LogDebug("Configurator.is64Architecture: " + Program.Configurator.Is64Architecture);
         }
     }
 }
