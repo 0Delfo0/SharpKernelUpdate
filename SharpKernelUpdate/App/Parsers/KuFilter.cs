@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using SharpKernelUpdate.App.Model;
 
 namespace SharpKernelUpdate.App.Parsers
@@ -65,7 +66,7 @@ namespace SharpKernelUpdate.App.Parsers
             }
             catch(Exception e)
             {
-                Program.Log.Error("Normalize", e);
+                Program.Log.LogError("Normalize", e);
             }
 
             if(retList.Count <= 0)

@@ -6,8 +6,13 @@
         <OutputType>Exe</OutputType>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AngleSharp" Version="0.9.9"/>
+        <PackageReference Include="AngleSharp" Version="0.9.9.1"/>
         <PackageReference Include="GtkSharp" Version="3.22.24.16"/>
-        <PackageReference Include="log4net" Version="2.0.8"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0"/>
+        <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-rc5"/>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Config\nlog.config"/>
+        <EmbeddedResource Include="Config\NLog.xsd"/>
     </ItemGroup>
 </Project>

@@ -1,22 +1,27 @@
 ﻿using System;
-using System.Reflection;
 using Gtk;
-using log4net;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using SharpKernelUpdate.App.Gui;
 using SharpKernelUpdate.App.Gui.Gtk;
 
 namespace SharpKernelUpdate.App
 {
-    internal static class Program
+    internal class Program
     {
-        public static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        public static ILogger Log;
 
         public static readonly KuConfigurator Configurator = new KuConfigurator();
 
         [STAThread]
         private static void Main()
         {
-            Log.Info("START");
+            var servicesProvider = GetServiceProvider();
+
+            Log = GetLogger(servicesProvider);
+
+            Log.LogInformation("START");
 
             Application.Init();
 
@@ -24,6 +29,25 @@ namespace SharpKernelUpdate.App
             sharpKernelUpdateWindow.Show();
 
             Application.Run();
+        }
+
+        private static ILogger GetLogger(IServiceProvider servicesProvider)
+        {
+            return servicesProvider.GetService<ILogger<Program>>();
+        }
+
+        private static IServiceProvider GetServiceProvider()
+        {
+            var services = new ServiceCollection();
+
+            services.AddLogging();
+            var provider = services.BuildServiceProvider();
+
+            var factory = provider.GetService<ILoggerFactory>();
+            factory.AddNLog(new NLogProviderOptions {CaptureMessageTemplates = true, CaptureMessageProperties = true});
+            factory.ConfigureNLog(@"nlog.config");
+
+            return services.BuildServiceProvider();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AngleSharp.Parser.Html;
 using Gtk;
+using Microsoft.Extensions.Logging;
 using SharpKernelUpdate.App.Gui;
 using SharpKernelUpdate.App.Model;
 using SharpKernelUpdate.App.Parsers.Downloaders;
@@ -23,7 +24,7 @@ namespace SharpKernelUpdate.App.Parsers
 
             foreach(var i in _mainList)
             {
-                Program.Log.Debug(i.ToString());
+                Program.Log.LogDebug(i.ToString());
             }
 
             return _mainList;
@@ -71,7 +72,7 @@ namespace SharpKernelUpdate.App.Parsers
 
                     if(tmp.Count <= 0 || !isStableVersion)
                         continue;
-                    var urlItem = new KuUrlItem()
+                    var urlItem = new KuUrlItem
                     {
                         FullName = fullName,
                         SplitName = tmp
@@ -82,7 +83,7 @@ namespace SharpKernelUpdate.App.Parsers
             }
             catch(Exception e)
             {
-                Program.Log.Error("Error", e);
+                Program.Log.LogError("Error", e);
             }
         }
     }
